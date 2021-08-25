@@ -50,28 +50,27 @@ platform :ios do
     end
 
     # Parse changelog data
-    changelog_path = options[:changelog_path] ? options[:changelog_path] : "../CHANGELOG.md"
+    changelog_path = options[:changelog_path] ? options[:changelog_path] : "../CHANGELOG.adoc"
     changelog_data = File.read(changelog_path)
     # Try to find all markdown headers and split
-    changelog_sections = changelog_data.split(/\#{2,3}\s/)
+    changelog_sections = changelog_data.split(/\={2,3}\s/)
     # Look out for new section of the newest version
     current_changelog_index = changelog_sections.index { |h| h.start_with?("[#{version}]")}
 
     unless current_changelog_index
-      UI.error("Please add all changes of the version to the CHANGELOG.md file")
+      UI.error("Please add all changes of the version to the CHANGELOG.adoc file")
     end
 
     # Get all split for this version and combine them again to one text
     changelog_header_indices = changelog_sections.each_with_index.select {|s, _| s.match(/^\[([0-9]+)\.([0-9]+)\.([0-9]+)\-?([0-9a-zA-Z]*)\.?([0-9a-zA-Z]*)\]/) }.map(&:last)
     next_changelog_index = changelog_header_indices.index { |h| h == current_changelog_index } + 1
-    changelog = "### " + changelog_sections[current_changelog_index + 1...changelog_header_indices[next_changelog_index]].join("### ")
+    changelog = "=== " + changelog_sections[current_changelog_index + 1...changelog_header_indices[next_changelog_index]].join("=== ")
 
     # Ask for confirmation
     if prompt(text: "#{version} has been prepped for release. If you have any additional changes you would like to make to the README or CHANGELOG, please do those before continuing. Would you like to commit, tag, and push #{version} to #{remote}?".green, boolean: true, ci_input:"y")
 
       # Update version in different places
-      update_plist_versions(sdk_version: version)
-      update_sdk_podspec_version(version: version)
+      update_plist_versions(version: version)
       update_readme_versions(version: version)
 
       # Generate new documentation using Asciidoc
@@ -85,7 +84,7 @@ platform :ios do
       )
 
       # Build fat library for GitHub release page
-      build_xcframeworks(sdk_version: version, crypto_version: crypto_version)
+      build_xcframework(version: version)
 
       # Push latest changes
       push_to_git_remote(
@@ -98,9 +97,7 @@ platform :ios do
       push_git_tags(tag: "#{version}")
 
       # Post new release to GitHub
-      archiveAllFrameworksPath = allXcFrameworksArchivePath(version)
-      archiveSDKPath = sdkFrameworkArchivePath(version)
-      archiveCryptoPath = cryptoFrameworkArchivePath(options[:crypto_version])
+      archiveCryptoPath = cryptoFrameworkArchivePath(options[:version])
 
       # Post new release to GitHub
       gh_release(
@@ -108,9 +105,7 @@ platform :ios do
         api_token:options[:api_token],
         changelog: changelog,
         is_prerelease: is_prerelease,
-        asset1: archiveAllFrameworksPath,
-        asset2: archiveSDKPath,
-        asset3: archiveCryptoPath
+        framework: archiveCryptoPath
       )
 
     else
@@ -135,7 +130,7 @@ platform :ios do
       configuration = "Release"
       buildPath = "xcbuild"
 
-      archiveCryptoPath = cryptoFrameworkArchivePath(options[:crypto_version])
+      archiveCryptoPath = cryptoFrameworkArchivePath(options[:version])
       if File.exist?(archiveCryptoPath)
         sh "rm #{archiveCryptoPath}"
       end
@@ -229,7 +224,7 @@ platform :ios do
   desc "Update AppStore and Data4LifeSDK version number in project plists"
   lane :update_plist_versions do |options|
     if options[:version] == nil
-        raise "Missing SDK version".red
+        raise "Missing version".red
     end
 
     sdk_version = options[:version]
