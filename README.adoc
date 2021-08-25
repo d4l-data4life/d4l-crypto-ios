@@ -1,6 +1,5 @@
-= Data4Life README Template
-:link-repository: https://github.com/d4l-data4life/hc-readme-template
-:project_version: 0.1.0
+= Data4Life Crypto iOS SDK
+:library_version: 1.6.0
 :doctype: article
 :!showtitle:
 :toc: macro
@@ -8,6 +7,7 @@
 :toc-title:
 :icons: font
 :imagesdir: assets/images
+:link-repository: https://github.com/d4l-data4life/d4l-crypto-ios
 ifdef::env-github[]
 :warning-caption: :warning:
 :caution-caption: :fire:
@@ -19,27 +19,28 @@ endif::[]
 ++++
 <div align="center">
     <p><!-- PROJECT LOGO -->
-        <a href="https://github.com/d4l-data4life/hc-readme-template">
-            <img src="assets/images/d4l-logo.svg" width="150"/>
-        </a>
+        <a><img src="assets/images/d4l-logo.svg" width="150"/></a>
     </p>
     <p><!-- PROJECT TITLE -->
-        <h3>Data4Life README Template</h3>
+        <h3>Data4Life's Data-Donation SDK for Android and iOS</h3>
     </p>
     <p><!-- PROJECT DESCRIPTION -->
-        An Asciidoc README template
+        A crossplatfrom SDK for Data-Donation on Android and iOS.
     </p>
     <p><!-- PROJECT DOCUMENTATION -->
         <a href="README.adoc"><strong>Explore the docs »</strong></a>
     </p>
     <p><!-- PROJECT ISSUES/FEATURES -->
-        <a href="https://github.com/d4l-data4life/hc-readme-template/issues">Report Bug</a>
+        <a href="https://github.com/d4l-data4life/d4l-crypto-ios/issues">Report Bug</a>
         ·
-        <a href="https://github.com/d4l-data4life/hc-readme-template/issues">Request Feature</a>
+        <a href="https://github.com/d4l-data4life/d4l-crypto-ios/issues">Request Feature</a>
     </p>
-    <p><!-- PROJECT BADGES see badges.adoc how to change them-->
-        <a href="https://github.com/d4l-data4life/hc-readme-template/releases">
-            <img src="assets/images/badge-release-latest.svg" alt="Latest release"/>
+    <p><!-- PROJECT BADGES see badges.adoc how to change them -->
+        <a href="https://github.com/d4l-data4life/d4l-crypto-ios/releases">
+            <img src="assets/images/badge-release-latest.svg" alt="Latest version"/>
+        </a>
+        <a href="https://github.com/d4l-data4life/d4l-crypto-ios/actions">
+            <img src="https://github.com/d4l-data4life/d4l-crypto-ios/actions/workflows/pr-test.yml/badge.svg" alt="Build Status"/>
         </a>
         <a>
             <img src="assets/images/badge-platform-support.svg" alt="Platform"/>
@@ -53,63 +54,185 @@ endif::[]
 
 [discrete]
 === Table Of Contents
-
 toc::[]
 
-== About the Project
+== About The Project
 
-This project acts as a template for READMEs written in Asciidoc. The project provides structure and building blocks to document a software project.
+Swift framework for handling all of the crypto operation for the Data4Life iOS frameworks.
 
-Documents written in AsciiDoc markup can be easily converted to HTML5, PDF, EPUB, and other formats. Its syntax is similar to markdown, and includes extensive features and flexibility which make it suitable for writing high quality documentation. AsciiDoc is simply plain-text. You can author documents in your favorite text editor of choice
+== Installation
 
-The README is accompanied by supporting documents covering different aspects of a software project:
+=== Swift Package Manager
 
-* link:CHANGELOG.adoc[Changelog] - What changed
-* link:CODE-OF-CONDUCT.adoc[Code of conduct] - How to behave
-* link:README.adoc[Readme] - The Readme
-* link:CONTRIBUTING.adoc[Contributing] - How to contribute to the project
-* link:DEVELOPING.adoc[Developing] - How to develop the project
-* link:LICENSE[License] - License the project is distributed under
-* link:TEMPLATE_CHANGELOG.adoc[Template changelog] - a blank version for your project
-* link:TEMPLATE_README.adoc[Template readme] - a blank version for your project
+To install with Swift package manager, select your project’s Swift Packages tab, and add our repository url, either as ssh or https url:
 
-=== Build With
+[source, terminal]
+----
+https://github.com/d4l-data4life/d4l-crypto-ios.git
+----
 
-* link:https://asciidoctor.org/[Asciidoc] - a text processor and publishing toolchain for converting Asciidoc content to other formats.
+OR
 
-== Getting Started
+[source, terminal]
+----
+git@github.com:d4l-data4life/d4l-crypto-ios.git
+----
 
-Clone this repository, copy it's content or use it as GitHub template and start adapting to your needs.
+In the next step, select the latest version, and then import the `Data4LifeCrypto` framework in your target.
 
-=== Prerequisites
+== Features 
 
-* plain text editor
-* IDE with Asciidoc support
+=== Supported symmetric algorithms
+`Data4LifeCrypto` supports two modes of symmetric crypto operations:
+* `AES-SHA256-CBC-PKCS7`
+* `AES-SHA256-GCM-NOPADDING`
 
-=== Installation
+*Note*: Provided by Apple Cryptokit frameworks
 
-Pick the editor of your choice and install the Asciidoc plugin as preferred.
+=== Supported asymmetric algorithms
+`Data4LifeCrypto` supports one mode of asymmetric crypto operations:
+* `RSA-OAEP-SHA256`
 
-* AndroidStudio (with link:https://plugins.jetbrains.com/plugin/7391-asciidoc[plugin])
-* IntelliJ Idea (with link:https://plugins.jetbrains.com/plugin/7391-asciidoc[plugin])
-* Visual Studio Code (with link:https://marketplace.visualstudio.com/items?itemName=asciidoctor.asciidoctor-vscode[plugin])
-* link:https://asciidoclive.com[asciidocLive] - online editor
-* link:https://asciidocfx.com/[AsciidocFX]
+*Note*: Provided by Apple Security framework
 
-== Usage
+=== Storing and working with crypto keys
+`KeyPair` is managed by Apple and has to be loaded using `Security` framework APIs that expect `tag`.
+`Key` has to be stored manually in prefered storage of choice.
 
-Make yourself familiar with the document structure and have a look at:
+It's possible to generate `KeyPair` as it's stored on device, and use that to encrypt `Key`, that way it's possible to store data keys and encrypted sensitive information on the API.
 
-* link:https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/[Asciidoc Syntax Quick Reference]
-* link:https://asciidoctor.org/docs/asciidoc-writers-guide/[Asciidoc Writers Guide]
+Store keys and data:
+* Generate `Key` for encrypting data (`KeyType.data`)
+* Create key exchange format from the key type
+* Encrypt sensitive data using generated `Key`
+* Generate `KeyPair` for encrypting data key
+* Convert data key from `Key` type to `Data` type (`Key` conforms to `Codable`)
+* Encrypt key data using `KeyPair`
+* Store ciphertext, iv and encrypted data key in some storage
 
-Modify the given documents to your needs.
+Read keys and data:
+* Load already created `KeyPair` from the device
+* Load ciphertext, iv and encrypted data key from storage
+* Decrypt data key using keypair
+* Decrypt sensitive data using decrypted data key, ciphertext and iv
 
-== Roadmap
+=== Key (symmetric)
+Symmetric key used for encrypt/decrypt operations.
 
-This project is work in progress. We are working on adding more functionality, guidelines, documentation and other improvements.
+[source, swift]
+----
+struct Key: Codable {
+    let value: SymmetricKey
+    var algorithm: AlgorithmType
+    let keySize: KeySize
+    let type: KeyType
+}
+----
 
-See the open link:{link-repository}/issues[issues] for a list of proposed features and known issues.
+Create new key
+
+[source, swift]
+----
+func generate(keySize: KeySize, algorithm: AlgorithmType, type: KeyType) throws -> Key
+----
+
+Loading already existing key
+
+[source, swift]
+----
+let keyData = Data(...) // load from some storage
+let key = try JSONDecoder().decode(Key.self, from: keyData)
+----
+
+Exporting key for storage
+
+[source, swift]
+----
+let key = Key.generate(...)
+let keyData = try JSONEncoder().encode(key)
+----
+
+Example of creating a key and ecrypting data
+
+[source, swift]
+----
+let keyType: KeyType = .data
+let keyExchangeFormat = try KeyExhangeFactory.create(type: keyType)
+let key = try Key.generate(keySize: keyExchangeFormat.size, algorithm: keyExchangeFormat.algorithm, type: type)
+let iv = Data(bytes: [...]) // generate random IV
+
+let plaintext: Data = Data(bytes: [0x00, 0x01, 0x02])
+let ciphertext: Data = Data4LifeCryptor.symEncrypt(key: key, data: plaintext, iv: iv)
+// Store ciphertext, iv and key in a safe way
+----
+
+Decrypt the data
+
+[source, swift]
+----
+let key: Key =  ... // fetch key from storage
+let iv: Data = ... // fetch iv from storage
+let ciphertext: Data =  ... // fetch ciphertext from storage
+let plaintext: Data = try Data4LifeCryptor.symDecrypt(key: key, data: ciphertext, iv: iv)
+----
+
+=== KeyPair (asymmetric)
+
+[source, swift]
+----
+struct KeyPair: KeyPairType {
+    let privateKey: AsymmetricKey
+    let publicKey: AsymmetricKey
+    let keySize: KeySize
+    let algorithm: AlgorithmType
+}
+----
+
+Helper methods for working with keypairs (wrapper around `Security` framework)
+
+[source, swift]
+----
+func generate(tag: String, keySize: Int, algorithm: AlgorithmType) throws -> KeyPair
+func load(tag: String, algorithm: AlgorithmType) throws -> KeyPair
+func destroy(tag: String) throws
+----
+
+Exporting public key can be done in one of two formats `PKCS#1` or `SPKI`
+
+[source, swift]
+----
+let keypair = try KeyPair.generate(...)
+
+let pkcs1PubKey: String = keypair.publicKey.asBase64EncodedString()
+let spkiPubKey: String = keypair.publicKey.asSPKIBase64EncodedString()
+let pubKeyData: Data = JSONEncoder().encode(keypair) // will export `SPKI` encoded public key and ignore private key
+----
+
+Example of creating keypair and ecrypting data
+
+[source, swift]
+----
+let tag: String = "com.example.keypair"
+let keyType: KeyType = .appPrivate
+let keyExchangeFormat = try KeyExhangeFactory.create(type: type)
+let keypair = try KeyPair.generate(tag: tag, keySize: keyExchangeFormat.size, algorithm: keyExchangeFormat.algorithm)
+
+let plaintext: Data = Data(bytes: [0x00, 0x01, 0x02])
+let ciphertext: Data = try Data4LifeCryptor.asymEncrypt(key: keypair, data: plaintext)
+----
+
+Decrypt the data
+
+[source, swift]
+----
+let tag: String = "com.example.keypair"
+let keyType: KeyType = .appPrivate
+let keyExchangeFormat = KeyExhangeFactory.create(type: type)
+let keypair = try KeyPair.load(tag: tag, algorithm: keyExchangeFormat.algorithm)
+
+let ciphertext: Data = ... // fetch ciphertext from storage
+let plaintext: Data = try Data4LifeCryptor.asymDecrypt(key: keypair, data: ciphertext)
+----
 
 == Changelog
 
@@ -130,18 +253,9 @@ Releases use this format: `{major}.{minor}.{patch}`
 You want to help or share a proposal? You have a specific problem? Read the following:
 
 * link:CODE-OF-CONDUCT.adoc[Code of conduct] for details on our code of conduct.
-* link:CONTRIBUTING.adoc[Contributing] for further details about how to report bugs and propose features.
+* link:CONTRIBUTING.adoc[Contributing] for details about how to report bugs and propose features.
 * link:DEVELOPING.adoc[Developing] for details about our development process and how to build and test the project.
 
 == Copyright and License
 
-Copyright (c) 2021 D4L data4life gGmbH / All rights reserved.
-
-Please refer to our link:LICENSE[License] for more information.
-
-== Acknowledgements
-
-* link:https://github.com/matiassingers/awesome-readme[Awesome README]
-* link:https://github.com/othneildrew/Best-README-Template[Best README Template]
-* link:https://gist.github.com/PurpleBooth/109311bb0361f32d87a2[README Template]
-* link:https://github.com/JoeArauzo/AsciiDoc-README-Template[Asciidoc README Template]
+Copyright (c) 2021 D4L data4life gGmbH / All rights reserved. Please refer to our link:LICENSE[License] for further details.

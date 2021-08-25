@@ -1,5 +1,5 @@
 = Contributor Covenant Code of Conduct
-:link-repository: https://github.com/d4l-data4life/hc-readme-template
+:link-repository: https://github.com/d4l-data4life/d4l-crypto-ios
 :doctype: article
 :toc: macro
 :toclevels: 2

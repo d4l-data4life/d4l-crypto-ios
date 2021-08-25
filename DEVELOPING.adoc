@@ -1,5 +1,5 @@
 = Developing
-:link-repository: https://github.com/d4l-data4life/hc-readme-template
+:link-repository: https://github.com/d4l-data4life/d4l-crypto-ios
 :doctype: article
 :toc: macro
 :toclevels: 2
@@ -23,60 +23,34 @@ toc::[]
 
 == Prerequisites
 
-* link:https://developer.android.com/studio#downloads[Android Studio 4.2.2]
-* link:https://adoptopenjdk.net/?variant=openjdk8&jvmVariant=hotspot[Java 8] | link:https://developer.android.com/studio/write/java8-support[Limitations of Java language features and APIs] | https://jakewharton.com/d8-library-desugaring/[Desugaring]
-* link:https://kotlinlang.org/[Kotlin 1.4.32]
+* XCode 12.5
+* iOS 13.0
+* Swift 5.4+
+* Bundler
 
 == Installation
 
-=== Install Java & Kotlin
+=== Install Gems using bundler
 
-You could use link:https://brew.sh/[Homebrew] to install on mac
-
-[source,bash]
+[source, bash]
 ----
-brew tap adoptopenjdk/openjdk
-brew install adoptopenjdk8
-brew install kotlin
+bundle install
 ----
 
-OR The easiest way to install Java and Kotlin is to use link:https://sdkman.io/[SDK MAN]
+*Note*: Check the link:https://bundler.io/[official page] for info on how to install Bundler.
 
-Just open your terminal and enter:
+== Building
 
-[source,bash]
+Just open XCode, let the packages resolve and build the Data4LifeCrypto Scheme.
+
+=== Generate documentation
+
+Documentation is generated using Asciidoctor, all of the resoures can be found in link:asciidoc/[asciidoc], and generated HTML documentation can be found in [docs](docs/).
+
+[source, bash]
 ----
-curl -s "https://get.sdkman.io" | bash
+bundle exec fastlane generate_docs version:1.0.0
 ----
-
-Follow the setup instructions and verify that your installation works:
-
-[source,bash]
-----
-sdk version
-----
-
-If it shows you something like `5.11.5+713` then your good to continue.
-
-Just install the mentioned dependencies:
-
-[source,bash]
-----
-sdk install java 8.0.292.hs-adpt
-sdk install kotlin 1.4.32
-----
-
-Check your installation by:
-
-[source,bash]
-----
-java -version
-kotlin -version
-----
-
-=== Android Studio
-
-For better interop with iOS you may install the link:https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile[KMM plugin for Android Studio]. It let's you run, test and debug shared code on Android and iOS without switching the IDEs.
 
 == Development Process
 
@@ -117,8 +91,26 @@ Add following changes:
 * Update README.adoc `crypto-version` to release version
 * Update the latest release badge link:assets/images/badges.adoc[HowTo]
 
-Releases are automatically created when a tag in the form of `v{major}.{minor}.{patch}` is added.
+=== Manual steps
 
-== Develop
+Updating link:CHANGELOG.md[CHANGELOG] is the only required manual step, release script expects to find matching version in the CHANGELOG.adoc as the one that used while calling `release_framework` Fastlane action. It takes all of the chnages and uploads them to the GitHub release page.
 
-TODO
+*Note*: Release script will fail if there is no new version defined in the changelog
+
+=== Running the script
+Folowing command will release new version of framework while handling couple of things:
+
+* Set new project version
+* Set new framework version
+* Set new version in the README.adoc
+* Generate new documentation
+* Do sanity checks (proper branch, proper version number in changelog etc.)
+* Commit changes and create version tag
+* Push new commit and tag to GitHub
+* Create GitHub release page with all of the information for [CHANGELOG.adoc](CHANGELOG.adoc)
+* Upload prebuilt framework to the release page
+
+[source, bash]
+----
+bundle exec fastlane release_framework version:"1.0.0" api_token:"super-secret-GitHub-API-token"
+----

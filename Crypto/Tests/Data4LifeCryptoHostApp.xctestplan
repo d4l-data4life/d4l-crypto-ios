@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "35FB4314-7802-4794-867E-E6B0A9640FD6",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Data4LifeCrypto.xcodeproj",
+      "identifier" : "36FA37D226D6667B00DDCC35",
+      "name" : "Data4LifeCryptoHostApp"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Data4LifeCrypto.xcodeproj",
+        "identifier" : "CD109137225B89D600325389",
+        "name" : "Data4LifeCryptoTests"
+      }
+    }
+  ],
+  "version" : 1
+}

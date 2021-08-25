@@ -1,0 +1,68 @@
+name: D4L SDK CI (PR Testing)
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    env:
+      D4L_EXAMPLE_CONFIG: ${{ secrets.D4L_EXAMPLE_CONFIG }}
+    concurrency:
+      group: build-${{ github.head_ref }}
+      cancel-in-progress: true
+    steps:
+    - name: Display runner context
+      run: hostname -s
+    - name: Check out repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cache gems
+      uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gem-
+    - name: Cache Swift packages
+      uses: actions/cache@v2
+      with:
+        path: .build
+        key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+        restore-keys: ${{ runner.os }}-spm-
+    - run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+    - name: Reset iOS simulators (Required to avoid tests failing problem)
+      run: xcrun simctl erase all
+    - name: Generate iOS Config JSON
+      run: printf '%s\n' "$D4L_EXAMPLE_CONFIG" > d4l-example-app-config.json
+    - name: lint
+      run: bundle exec fastlane lint
+    - name: test
+      run: bundle exec fastlane test
+    - name: Install sonar scanner
+      run: brew install sonar-scanner
+    - name: Create sonarqube report
+      run: |
+           xcrun llvm-profdata merge build/DerivedData/Build/ProfileData/*/*.profdata -output merged.profdata
+           xcrun --run llvm-cov show build/DerivedData/Build/Products/Debug-iphonesimulator/Data4LifeSDK.framework/Data4LifeSDK --instr-profile merged.profdata >> sonarqube-swift-coverage
+           xcrun --run llvm-cov show build/DerivedData/Build/Products/Debug-iphonesimulator/Data4LifeCrypto.framework/Data4LifeCrypto --instr-profile merged.profdata >> sonarqube-swift-coverage
+    - name: SonarCloud PR Scan
+      if: github.event_name == 'pull_request'
+      run: sonar-scanner -Dsonar.login=$SONAR_TOKEN -Dsonar.pullrequest.base=$GITHUB_BASE_REF -Dsonar.pullrequest.branch=$GITHUB_HEAD_REF -Dsonar.pullrequest.key=${{ github.event.pull_request.number }} -Dsonar.pullrequest.provider=GitHub
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    - name: SonarCloud Push Scan
+      if: github.event_name == 'push'
+      run: sonar-scanner -Dsonar.login=$SONAR_TOKEN
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
