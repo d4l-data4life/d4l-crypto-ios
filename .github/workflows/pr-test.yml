@@ -1,4 +1,4 @@
-name: D4L SDK CI (PR Testing)
+name: D4L Crypto CI
 
 on:
   push:
@@ -11,8 +11,6 @@ jobs:
   build:
     runs-on: macos-latest
 
-    env:
-      D4L_EXAMPLE_CONFIG: ${{ secrets.D4L_EXAMPLE_CONFIG }}
     concurrency:
       group: build-${{ github.head_ref }}
       cancel-in-progress: true
@@ -30,19 +28,11 @@ jobs:
         key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: |
           ${{ runner.os }}-gem-
-    - name: Cache Swift packages
-      uses: actions/cache@v2
-      with:
-        path: .build
-        key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
-        restore-keys: ${{ runner.os }}-spm-
     - run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
     - name: Reset iOS simulators (Required to avoid tests failing problem)
       run: xcrun simctl erase all
-    - name: Generate iOS Config JSON
-      run: printf '%s\n' "$D4L_EXAMPLE_CONFIG" > d4l-example-app-config.json
     - name: lint
       run: bundle exec fastlane lint
     - name: test
@@ -52,7 +42,6 @@ jobs:
     - name: Create sonarqube report
       run: |
            xcrun llvm-profdata merge build/DerivedData/Build/ProfileData/*/*.profdata -output merged.profdata
-           xcrun --run llvm-cov show build/DerivedData/Build/Products/Debug-iphonesimulator/Data4LifeSDK.framework/Data4LifeSDK --instr-profile merged.profdata >> sonarqube-swift-coverage
            xcrun --run llvm-cov show build/DerivedData/Build/Products/Debug-iphonesimulator/Data4LifeCrypto.framework/Data4LifeCrypto --instr-profile merged.profdata >> sonarqube-swift-coverage
     - name: SonarCloud PR Scan
       if: github.event_name == 'pull_request'
