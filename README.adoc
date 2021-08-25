@@ -22,10 +22,10 @@ endif::[]
         <a><img src="assets/images/d4l-logo.svg" width="150"/></a>
     </p>
     <p><!-- PROJECT TITLE -->
-        <h3>Data4Life's Data-Donation SDK for Android and iOS</h3>
+        <h3>Data4Life Crypto iOS</h3>
     </p>
     <p><!-- PROJECT DESCRIPTION -->
-        A crossplatfrom SDK for Data-Donation on Android and iOS.
+        Swift framework for handling all of the crypto operation for the Data4Life iOS frameworks.
     </p>
     <p><!-- PROJECT DOCUMENTATION -->
         <a href="README.adoc"><strong>Explore the docs »</strong></a>
