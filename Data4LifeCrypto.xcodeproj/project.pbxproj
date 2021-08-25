@@ -448,7 +448,7 @@
 					36FA37D226D6667B00DDCC35 = {
 						CreatedOnToolsVersion = 12.5;
 						DevelopmentTeam = D2QJWMP9SU;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					CD108FF0225B88BE00325389 = {
 						DevelopmentTeam = D2QJWMP9SU;
@@ -596,8 +596,8 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Data4LifeCryptoHostApp/Preview Content\"";
 				DEVELOPMENT_TEAM = D2QJWMP9SU;
 				ENABLE_PREVIEWS = YES;
@@ -609,7 +609,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = de.gesundheitscloud.HCSDKIntegration;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "sdk-integration-development";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
