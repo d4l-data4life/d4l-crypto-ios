@@ -1,0 +1,147 @@
+= Data4Life README Template
+:link-repository: https://github.com/d4l-data4life/hc-readme-template
+:project_version: 0.1.0
+:doctype: article
+:!showtitle:
+:toc: macro
+:toclevels: 2
+:toc-title:
+:icons: font
+:imagesdir: assets/images
+ifdef::env-github[]
+:warning-caption: :warning:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+endif::[]
+
+++++
+<div align="center">
+    <p><!-- PROJECT LOGO -->
+        <a href="https://github.com/d4l-data4life/hc-readme-template">
+            <img src="assets/images/d4l-logo.svg" width="150"/>
+        </a>
+    </p>
+    <p><!-- PROJECT TITLE -->
+        <h3>Data4Life README Template</h3>
+    </p>
+    <p><!-- PROJECT DESCRIPTION -->
+        An Asciidoc README template
+    </p>
+    <p><!-- PROJECT DOCUMENTATION -->
+        <a href="README.adoc"><strong>Explore the docs »</strong></a>
+    </p>
+    <p><!-- PROJECT ISSUES/FEATURES -->
+        <a href="https://github.com/d4l-data4life/hc-readme-template/issues">Report Bug</a>
+        ·
+        <a href="https://github.com/d4l-data4life/hc-readme-template/issues">Request Feature</a>
+    </p>
+    <p><!-- PROJECT BADGES see badges.adoc how to change them-->
+        <a href="https://github.com/d4l-data4life/hc-readme-template/releases">
+            <img src="assets/images/badge-release-latest.svg" alt="Latest release"/>
+        </a>
+        <a>
+            <img src="assets/images/badge-platform-support.svg" alt="Platform"/>
+        </a>
+        <a href="LICENSE">
+            <img src="assets/images/badge-license.svg" alt="License"/>
+        </a>
+    </p>
+</div>
+++++
+
+[discrete]
+=== Table Of Contents
+
+toc::[]
+
+== About the Project
+
+This project acts as a template for READMEs written in Asciidoc. The project provides structure and building blocks to document a software project.
+
+Documents written in AsciiDoc markup can be easily converted to HTML5, PDF, EPUB, and other formats. Its syntax is similar to markdown, and includes extensive features and flexibility which make it suitable for writing high quality documentation. AsciiDoc is simply plain-text. You can author documents in your favorite text editor of choice
+
+The README is accompanied by supporting documents covering different aspects of a software project:
+
+* link:CHANGELOG.adoc[Changelog] - What changed
+* link:CODE-OF-CONDUCT.adoc[Code of conduct] - How to behave
+* link:README.adoc[Readme] - The Readme
+* link:CONTRIBUTING.adoc[Contributing] - How to contribute to the project
+* link:DEVELOPING.adoc[Developing] - How to develop the project
+* link:LICENSE[License] - License the project is distributed under
+* link:TEMPLATE_CHANGELOG.adoc[Template changelog] - a blank version for your project
+* link:TEMPLATE_README.adoc[Template readme] - a blank version for your project
+
+=== Build With
+
+* link:https://asciidoctor.org/[Asciidoc] - a text processor and publishing toolchain for converting Asciidoc content to other formats.
+
+== Getting Started
+
+Clone this repository, copy it's content or use it as GitHub template and start adapting to your needs.
+
+=== Prerequisites
+
+* plain text editor
+* IDE with Asciidoc support
+
+=== Installation
+
+Pick the editor of your choice and install the Asciidoc plugin as preferred.
+
+* AndroidStudio (with link:https://plugins.jetbrains.com/plugin/7391-asciidoc[plugin])
+* IntelliJ Idea (with link:https://plugins.jetbrains.com/plugin/7391-asciidoc[plugin])
+* Visual Studio Code (with link:https://marketplace.visualstudio.com/items?itemName=asciidoctor.asciidoctor-vscode[plugin])
+* link:https://asciidoclive.com[asciidocLive] - online editor
+* link:https://asciidocfx.com/[AsciidocFX]
+
+== Usage
+
+Make yourself familiar with the document structure and have a look at:
+
+* link:https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/[Asciidoc Syntax Quick Reference]
+* link:https://asciidoctor.org/docs/asciidoc-writers-guide/[Asciidoc Writers Guide]
+
+Modify the given documents to your needs.
+
+== Roadmap
+
+This project is work in progress. We are working on adding more functionality, guidelines, documentation and other improvements.
+
+See the open link:{link-repository}/issues[issues] for a list of proposed features and known issues.
+
+== Changelog
+
+See link:CHANGELOG.adoc[changelog]
+
+== Versioning
+
+We use http://semver.org/[Semantic Versioning] as a guideline for our versioning.
+
+Releases use this format: `{major}.{minor}.{patch}`
+
+* Breaking changes bump `{major}` and reset `{minor}` & `{patch}`
+* Backward compatible changes bump `{minor}` and reset `{patch}`
+* Bug fixes bump `{patch}`
+
+== Contributing
+
+You want to help or share a proposal? You have a specific problem? Read the following:
+
+* link:CODE-OF-CONDUCT.adoc[Code of conduct] for details on our code of conduct.
+* link:CONTRIBUTING.adoc[Contributing] for further details about how to report bugs and propose features.
+* link:DEVELOPING.adoc[Developing] for details about our development process and how to build and test the project.
+
+== Copyright and License
+
+Copyright (c) 2021 D4L data4life gGmbH / All rights reserved.
+
+Please refer to our link:LICENSE[License] for more information.
+
+== Acknowledgements
+
+* link:https://github.com/matiassingers/awesome-readme[Awesome README]
+* link:https://github.com/othneildrew/Best-README-Template[Best README Template]
+* link:https://gist.github.com/PurpleBooth/109311bb0361f32d87a2[README Template]
+* link:https://github.com/JoeArauzo/AsciiDoc-README-Template[Asciidoc README Template]
