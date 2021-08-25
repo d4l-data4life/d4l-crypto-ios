@@ -1,15 +1,9 @@
 default_platform :ios
 
+repository = "d4l-data4life/d4l-crypto-ios"
 project = "Data4LifeCrypto"
 cryptoScheme = "Data4LifeCrypto"
 cryptoName = "Data4LifeCrypto"
-
-repository = "d4l-data4life/d4l-crypto-ios"
-crypto_podspec_path = '../Data4LifeCrypto.podspec'
-podspecs_repo_name = 'd4l-data4life'
-podspecs_repo_url = 'https://github.com/d4l-data4life/d4l-cocoapods-specs'
-
-device = "iPhone 12"
 
 platform :ios do
   desc "Run unit tests and upload code coverage"
@@ -17,7 +11,6 @@ platform :ios do
     scan(
       scheme: "Data4LifeCryptoHostApp",
       derived_data_path: "build/DerivedData",
-      devices: device,
       code_coverage: true,
       clean: true
     )
