@@ -19,13 +19,13 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "Data4LifeCrypto",
-            url: "https://github.com/d4l-data4life/d4l-sdk-ios/releases/download/\(cryptoVersion)/Data4LifeCrypto-xcframework-\(cryptoVersion).zip",
+            url: "https://github.com/d4l-data4life/d4l-crypto-ios/releases/download/\(cryptoVersion)/Data4LifeCrypto-xcframework-\(cryptoVersion).zip",
             checksum: "fc6a972fd1434a6f48b6b1a905cb3c4a66af19b797125dbdddfbd253e54e8360"
         ),
         .testTarget(name: "Data4LifeCryptoTests",
                     dependencies: ["Data4LifeCrypto"],
                     path: "Crypto/Tests",
-                    exclude: ["Info.plist"],
+                    exclude: ["Info.plist", "Data4LifeCryptoHostApp.xctestplan"],
                     resources: [.process("JSON Payloads")]),
     ]
 )
