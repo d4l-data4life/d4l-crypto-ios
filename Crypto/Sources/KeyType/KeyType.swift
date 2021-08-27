@@ -22,4 +22,5 @@ public enum KeyType: String, CaseIterable {
     case attachment = "ak"
     case appPrivate = "apriv"
     case appPublic = "apub"
+    case dataDonation = "dataDonationKey"
 }

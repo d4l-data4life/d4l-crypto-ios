@@ -30,7 +30,7 @@ public struct KeyExhangeFactory {
         case .tag:
             let algo = AESAlgorithm(cipher: .aes, padding: .pkcs7, blockMode: .cbc, hash: nil)
             return (algo, 256)
-        case .appPrivate, .appPublic:
+        case .appPrivate, .appPublic, .dataDonation:
             return (RSAAlgorithm(), 2048)
         }
     }
