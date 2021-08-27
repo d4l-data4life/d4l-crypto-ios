@@ -8,6 +8,7 @@ buildPath = "build/DerivedData"
 hostAppScheme = "Data4LifeCryptoHostApp"
 
 platform :ios do
+
   desc "Run unit tests and upload code coverage"
   lane :test do
     scan(
@@ -18,13 +19,38 @@ platform :ios do
     )
   end
 
+  desc "Lint sources using swiftlint and check the license headers"
+  lane :lint do |options|
+    autocorrect = options[:autocorrect] == true
+    lint_headers(autocorrect)
+    swiftlint(
+      mode: autocorrect ? :autocorrect : :lint,
+      config_file: ".swiftlint.yml",
+      strict: !autocorrect
+    )
+  end
+
+  desc "Check license headers"
+  lane :lint_headers do |options|
+    autocorrect = options[:autocorrect] == true
+    files = Dir.chdir("..") do
+      files = Dir.glob('{Crypto/Sources,Crypto/Tests}/**/*.{swift,h,cpp,m}')
+    end
+    license = "./LICENSE"
+
+    lint_source_for_license_headers(
+      license: license,
+      files: files,
+      autocorrect: autocorrect,
+      strict: !autocorrect
+    )
+  end
+
   desc "Prepare release"
   desc "#### Options"
   desc " * **`version`** (required): The new version of the framework"
   desc " * **`api_token`** (required): Github API token"
-
   lane :prepare_release do | options |
-
     if !options[:version]
       UI.user_error!("Please add required parameter version (eg. version:\"1.0.0\"")
     end
@@ -38,7 +64,7 @@ platform :ios do
     remote = "origin"
     changelog = parseAndCheckChangelog("../CHANGELOG.adoc", version)
     archiveCryptoPath = cryptoFrameworkArchivePath(version)
-    
+
     unless changelog 
       UI.user_error!("Please add all changes of the version to the CHANGELOG.adoc file")
     end 
@@ -79,18 +105,6 @@ platform :ios do
       UI.message("When finished, commit your changes.")
     end
   end
-
-  desc "Update readme badge"
-  lane :update_badge do |options|
-    if options[:version] == nil
-      UI.user_error!("Please add required parameter version (eg. version:\"1.0.0\"")
-    end
-    
-    Dir.chdir("..") do
-      sh "curl https://img.shields.io/badge/Release-#{options[:version]}-blueviolet.svg -s -o assets/images/badge-release-latest.svg"
-    end 
-  end 
-
 
   desc "Build xcframework for distribution"
   lane :build_crypto do |options|
@@ -155,13 +169,6 @@ platform :ios do
           -framework #{buildPath}/#{configuration}/#{frameworkName}-iphoneos.xcarchive/Products/Library/Frameworks/#{frameworkName}.framework \
           -output #{outputPath}"
     end
-  end
-
-  desc "Build xcframework for distribution"
-  lane :build_crypto_xcframework do |options|
-    build_project_xcframework(schemeName: scheme,
-                              frameworkName: name,
-                              outputPath: "#{name}.xcframework")
   end
 
   desc "Upload to a github release draft"
@@ -243,33 +250,16 @@ platform :ios do
     File.write(path, readmeDataUpdated)
   end
 
-  desc "Lint sources using swiftlint and check the license headers"
-  lane :lint do |options|
-    autocorrect = options[:autocorrect] == true
-
-    swiftlint(
-      mode: autocorrect ? :autocorrect : :lint,
-      config_file: ".swiftlint.yml",
-      strict: !autocorrect
-    )
-    lint_headers(autocorrect)
-  end
-
-  desc "Check license headers"
-  lane :lint_headers do |options|
-    autocorrect = options[:autocorrect] == true
-    files = Dir.chdir("..") do
-      files = Dir.glob('{Crypto/Sources,Crypto/Tests}/**/*.{swift,h,cpp,m}')
+  desc "Update readme badge"
+  lane :update_badge do |options|
+    if options[:version] == nil
+      UI.user_error!("Please add required parameter version (eg. version:\"1.0.0\"")
     end
-    license = "./LICENSE"
-
-    lint_source_for_license_headers(
-      license: license,
-      files: files,
-      autocorrect: autocorrect,
-      strict: !autocorrect
-    )
-  end
+    
+    Dir.chdir("..") do
+      sh "curl https://img.shields.io/badge/Release-#{options[:version]}-blueviolet.svg -s -o assets/images/badge-release-latest.svg"
+    end 
+  end 
 
   def cryptoFrameworkArchivePath(version)
      return "Data4LifeCrypto-xcframework-#{version}.zip"

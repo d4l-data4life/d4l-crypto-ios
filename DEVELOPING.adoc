@@ -89,7 +89,7 @@ NOTE: Prepare release script will fail if there is no new version defined in the
 
 The script executes the following commands:
 
-* Set new version in the README.adoc and project files
+* Update new versions in the README.adoc and project files (including badges)
 * Do sanity checks (Proper version number in changelog etc.)
 * Build framework and upload it to S3
 * Update Package swift info (url and checksum)

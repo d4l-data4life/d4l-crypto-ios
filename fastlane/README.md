@@ -21,6 +21,16 @@ or alternatively using `brew install fastlane`
 fastlane ios test
 ```
 Run unit tests and upload code coverage
+### ios lint
+```
+fastlane ios lint
+```
+Lint sources using swiftlint and check the license headers
+### ios lint_headers
+```
+fastlane ios lint_headers
+```
+Check license headers
 ### ios prepare_release
 ```
 fastlane ios prepare_release
@@ -32,11 +42,6 @@ Prepare release
  * **`version`** (required): The new version of the framework
 
  * **`api_token`** (required): Github API token
-### ios update_badge
-```
-fastlane ios update_badge
-```
-Update readme badge
 ### ios build_crypto
 ```
 fastlane ios build_crypto
@@ -47,11 +52,6 @@ Build xcframework for distribution
 fastlane ios build_xcframework
 ```
 Build any project xcframework
-### ios build_crypto_xcframework
-```
-fastlane ios build_crypto_xcframework
-```
-Build xcframework for distribution
 ### ios create_github_draft
 ```
 fastlane ios create_github_draft
@@ -67,16 +67,11 @@ Update version number in project plists
 fastlane ios update_readme_versions
 ```
 Update version numbers in README.adoc
-### ios lint
+### ios update_badge
 ```
-fastlane ios lint
+fastlane ios update_badge
 ```
-Lint sources using swiftlint and check the license headers
-### ios lint_headers
-```
-fastlane ios lint_headers
-```
-Check license headers
+Update readme badge
 
 ----
 
