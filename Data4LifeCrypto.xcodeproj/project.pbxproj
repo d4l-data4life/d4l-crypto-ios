@@ -12,6 +12,7 @@
 		36FA37D826D6667B00DDCC35 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FA37D726D6667B00DDCC35 /* ContentView.swift */; };
 		36FA37DA26D6667C00DDCC35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36FA37D926D6667C00DDCC35 /* Assets.xcassets */; };
 		36FA37DD26D6667C00DDCC35 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36FA37DC26D6667C00DDCC35 /* Preview Assets.xcassets */; };
+		36FA384426D8E82E00DDCC35 /* asymDonationKey.json in Resources */ = {isa = PBXBuildFile; fileRef = 36FA384326D8E82D00DDCC35 /* asymDonationKey.json */; };
 		CD1090B5225B893A00325389 /* KeyPair+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD109099225B893A00325389 /* KeyPair+Codable.swift */; };
 		CD1090B8225B893A00325389 /* AsymmetricKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10909B225B893A00325389 /* AsymmetricKey.swift */; };
 		CD1090BB225B893A00325389 /* AsymmetricKey+SPKI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10909C225B893A00325389 /* AsymmetricKey+SPKI.swift */; };
@@ -20,7 +21,7 @@
 		CD1090C4225B893A00325389 /* KeyOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1090A0225B893A00325389 /* KeyOptions.swift */; };
 		CD1090C7225B893A00325389 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1090A1225B893A00325389 /* Key.swift */; };
 		CD1090CA225B893A00325389 /* Key+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1090A2225B893A00325389 /* Key+Codable.swift */; };
-		CD1090CD225B893A00325389 /* KeyExhangeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1090A4225B893A00325389 /* KeyExhangeFactory.swift */; };
+		CD1090CD225B893A00325389 /* KeyExchangeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1090A4225B893A00325389 /* KeyExchangeFactory.swift */; };
 		CD1090D0225B893A00325389 /* KeyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1090A5225B893A00325389 /* KeyType.swift */; };
 		CD1090D3225B893A00325389 /* RSACipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1090A6225B893A00325389 /* RSACipher.swift */; };
 		CD1090D6225B893A00325389 /* AlgorithmType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1090A8225B893A00325389 /* AlgorithmType.swift */; };
@@ -41,9 +42,7 @@
 		CD1091A8225B8A0A00325389 /* symCommonExchangeKey.json in Resources */ = {isa = PBXBuildFile; fileRef = CD109190225B8A0A00325389 /* symCommonExchangeKey.json */; };
 		CD1091A9225B8A0A00325389 /* asymEncrypt.json in Resources */ = {isa = PBXBuildFile; fileRef = CD109191225B8A0A00325389 /* asymEncrypt.json */; };
 		CD1091AA225B8A0A00325389 /* symCommonEncrypt.json in Resources */ = {isa = PBXBuildFile; fileRef = CD109192225B8A0A00325389 /* symCommonEncrypt.json */; };
-		CD1091AB225B8A0A00325389 /* authStateTokenResponseSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = CD109194225B8A0A00325389 /* authStateTokenResponseSuccess.json */; };
 		CD1091AC225B8A0A00325389 /* asymPrivateExchangeKeyPKCS1.json in Resources */ = {isa = PBXBuildFile; fileRef = CD109195225B8A0A00325389 /* asymPrivateExchangeKeyPKCS1.json */; };
-		CD1091AD225B8A0A00325389 /* encryptedCommonTekKeys.json in Resources */ = {isa = PBXBuildFile; fileRef = CD109196225B8A0A00325389 /* encryptedCommonTekKeys.json */; };
 		CD1091AE225B8A0A00325389 /* CryptoTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD109198225B8A0A00325389 /* CryptoTestModel.swift */; };
 		CD1091AF225B8A0A00325389 /* CryptoModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD109199225B8A0A00325389 /* CryptoModelTests.swift */; };
 		CD1091B0225B8A0A00325389 /* Bundle+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10919B225B8A0A00325389 /* Bundle+JSON.swift */; };
@@ -79,6 +78,7 @@
 		36FA37DC26D6667C00DDCC35 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		36FA37DE26D6667C00DDCC35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36FA37E426D6681A00DDCC35 /* Data4LifeCryptoHostApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Data4LifeCryptoHostApp.xctestplan; sourceTree = "<group>"; };
+		36FA384326D8E82D00DDCC35 /* asymDonationKey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = asymDonationKey.json; sourceTree = "<group>"; };
 		CD109095225B88BE00325389 /* Data4LifeCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Data4LifeCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD109099225B893A00325389 /* KeyPair+Codable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyPair+Codable.swift"; sourceTree = "<group>"; };
 		CD10909B225B893A00325389 /* AsymmetricKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsymmetricKey.swift; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 		CD1090A0225B893A00325389 /* KeyOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyOptions.swift; sourceTree = "<group>"; };
 		CD1090A1225B893A00325389 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		CD1090A2225B893A00325389 /* Key+Codable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Key+Codable.swift"; sourceTree = "<group>"; };
-		CD1090A4225B893A00325389 /* KeyExhangeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyExhangeFactory.swift; sourceTree = "<group>"; };
+		CD1090A4225B893A00325389 /* KeyExchangeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyExchangeFactory.swift; sourceTree = "<group>"; };
 		CD1090A5225B893A00325389 /* KeyType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyType.swift; sourceTree = "<group>"; };
 		CD1090A6225B893A00325389 /* RSACipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSACipher.swift; sourceTree = "<group>"; };
 		CD1090A8225B893A00325389 /* AlgorithmType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgorithmType.swift; sourceTree = "<group>"; };
@@ -111,9 +111,7 @@
 		CD109190225B8A0A00325389 /* symCommonExchangeKey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = symCommonExchangeKey.json; sourceTree = "<group>"; };
 		CD109191225B8A0A00325389 /* asymEncrypt.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = asymEncrypt.json; sourceTree = "<group>"; };
 		CD109192225B8A0A00325389 /* symCommonEncrypt.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = symCommonEncrypt.json; sourceTree = "<group>"; };
-		CD109194225B8A0A00325389 /* authStateTokenResponseSuccess.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = authStateTokenResponseSuccess.json; sourceTree = "<group>"; };
 		CD109195225B8A0A00325389 /* asymPrivateExchangeKeyPKCS1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = asymPrivateExchangeKeyPKCS1.json; sourceTree = "<group>"; };
-		CD109196225B8A0A00325389 /* encryptedCommonTekKeys.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = encryptedCommonTekKeys.json; sourceTree = "<group>"; };
 		CD109198225B8A0A00325389 /* CryptoTestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoTestModel.swift; sourceTree = "<group>"; };
 		CD109199225B8A0A00325389 /* CryptoModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoModelTests.swift; sourceTree = "<group>"; };
 		CD10919B225B8A0A00325389 /* Bundle+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+JSON.swift"; sourceTree = "<group>"; };
@@ -167,6 +165,32 @@
 				36FA37DC26D6667C00DDCC35 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		36FA384526D8E83800DDCC35 /* Asymmetric */ = {
+			isa = PBXGroup;
+			children = (
+				CD10918A225B8A0A00325389 /* asymPrivateExchangeKeyPKCS8.json */,
+				CD109195225B8A0A00325389 /* asymPrivateExchangeKeyPKCS1.json */,
+				CD10918E225B8A0A00325389 /* asymDecrypt.json */,
+				CD109191225B8A0A00325389 /* asymEncrypt.json */,
+				36FA384326D8E82D00DDCC35 /* asymDonationKey.json */,
+			);
+			path = Asymmetric;
+			sourceTree = "<group>";
+		};
+		36FA384626D8E84D00DDCC35 /* Symmetric */ = {
+			isa = PBXGroup;
+			children = (
+				CD109189225B8A0A00325389 /* symCommonExchangeKeyInvalid.json */,
+				CD10918B225B8A0A00325389 /* symTagEncrypt.json */,
+				CD10918C225B8A0A00325389 /* symTagExchangeKey.json */,
+				CD10918D225B8A0A00325389 /* symCommonDecrypt.json */,
+				CD10918F225B8A0A00325389 /* symTagDecrypt.json */,
+				CD109190225B8A0A00325389 /* symCommonExchangeKey.json */,
+				CD109192225B8A0A00325389 /* symCommonEncrypt.json */,
+			);
+			path = Symmetric;
 			sourceTree = "<group>";
 		};
 		8374639C1E854E7500AB500F = {
@@ -248,7 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				CD1090A5225B893A00325389 /* KeyType.swift */,
-				CD1090A4225B893A00325389 /* KeyExhangeFactory.swift */,
+				CD1090A4225B893A00325389 /* KeyExchangeFactory.swift */,
 			);
 			path = KeyType;
 			sourceTree = "<group>";
@@ -290,37 +314,10 @@
 		CD109187225B8A0A00325389 /* JSON Payloads */ = {
 			isa = PBXGroup;
 			children = (
-				CD109188225B8A0A00325389 /* Shared */,
-				CD109193225B8A0A00325389 /* iOS Related */,
+				36FA384626D8E84D00DDCC35 /* Symmetric */,
+				36FA384526D8E83800DDCC35 /* Asymmetric */,
 			);
 			path = "JSON Payloads";
-			sourceTree = "<group>";
-		};
-		CD109188225B8A0A00325389 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				CD109189225B8A0A00325389 /* symCommonExchangeKeyInvalid.json */,
-				CD10918A225B8A0A00325389 /* asymPrivateExchangeKeyPKCS8.json */,
-				CD10918B225B8A0A00325389 /* symTagEncrypt.json */,
-				CD10918C225B8A0A00325389 /* symTagExchangeKey.json */,
-				CD10918D225B8A0A00325389 /* symCommonDecrypt.json */,
-				CD10918E225B8A0A00325389 /* asymDecrypt.json */,
-				CD10918F225B8A0A00325389 /* symTagDecrypt.json */,
-				CD109190225B8A0A00325389 /* symCommonExchangeKey.json */,
-				CD109191225B8A0A00325389 /* asymEncrypt.json */,
-				CD109192225B8A0A00325389 /* symCommonEncrypt.json */,
-			);
-			path = Shared;
-			sourceTree = "<group>";
-		};
-		CD109193225B8A0A00325389 /* iOS Related */ = {
-			isa = PBXGroup;
-			children = (
-				CD109194225B8A0A00325389 /* authStateTokenResponseSuccess.json */,
-				CD109195225B8A0A00325389 /* asymPrivateExchangeKeyPKCS1.json */,
-				CD109196225B8A0A00325389 /* encryptedCommonTekKeys.json */,
-			);
-			path = "iOS Related";
 			sourceTree = "<group>";
 		};
 		CD109197225B8A0A00325389 /* Models */ = {
@@ -507,11 +504,10 @@
 				CD1091A3225B8A0A00325389 /* symTagEncrypt.json in Resources */,
 				CD1091A2225B8A0A00325389 /* asymPrivateExchangeKeyPKCS8.json in Resources */,
 				CD1091A1225B8A0A00325389 /* symCommonExchangeKeyInvalid.json in Resources */,
-				CD1091AB225B8A0A00325389 /* authStateTokenResponseSuccess.json in Resources */,
 				CD1091A4225B8A0A00325389 /* symTagExchangeKey.json in Resources */,
-				CD1091AD225B8A0A00325389 /* encryptedCommonTekKeys.json in Resources */,
 				CD1091A7225B8A0A00325389 /* symTagDecrypt.json in Resources */,
 				CD1091AA225B8A0A00325389 /* symCommonEncrypt.json in Resources */,
+				36FA384426D8E82E00DDCC35 /* asymDonationKey.json in Resources */,
 				CD1091A6225B8A0A00325389 /* asymDecrypt.json in Resources */,
 				CD1091A8225B8A0A00325389 /* symCommonExchangeKey.json in Resources */,
 				CD1091AC225B8A0A00325389 /* asymPrivateExchangeKeyPKCS1.json in Resources */,
@@ -545,7 +541,7 @@
 				CD1090D3225B893A00325389 /* RSACipher.swift in Sources */,
 				CD1090DC225B893A00325389 /* RSAAlgorithm.swift in Sources */,
 				CD1090E5225B893A00325389 /* Data4LifeCryptoError.swift in Sources */,
-				CD1090CD225B893A00325389 /* KeyExhangeFactory.swift in Sources */,
+				CD1090CD225B893A00325389 /* KeyExchangeFactory.swift in Sources */,
 				CD1090C1225B893A00325389 /* KeyPair.swift in Sources */,
 				CD1090BB225B893A00325389 /* AsymmetricKey+SPKI.swift in Sources */,
 				CD1090D9225B893A00325389 /* AESAlgorithm.swift in Sources */,
