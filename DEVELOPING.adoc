@@ -27,29 +27,79 @@ toc::[]
 * iOS 13.0
 * Swift 5.4+
 * Bundler
+* AWS cli tool 
 
-== Installation
+== Install
 
 === Install Gems using bundler
+
+Install bundler by following instructions at the link:https://bundler.io/[official page].
+When done, run:
 
 [source, bash]
 ----
 bundle install
 ----
 
-*Note*: Check the link:https://bundler.io/[official page] for info on how to install Bundler.
 
-== Building
+=== Install AWS Cli tool
 
-Just open XCode, let the packages resolve and build the Data4LifeCrypto Scheme.
+Install the aws cli tool by following instructions at the link:https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-mac.html[official page].
 
-=== Generate documentation
-
-Documentation is generated using Asciidoctor, all of the resoures can be found in link:asciidoc/[asciidoc], and generated HTML documentation can be found in [docs](docs/).
+Configure it by entering:
 
 [source, bash]
 ----
-bundle exec fastlane generate_docs version:1.0.0
+aws configure
+----
+
+and entering following data
+
+[source, bash]
+----
+AWS Access Key ID: xxxxx
+AWS Secret Access Key: xxxxx
+Default region name: eu-central-1
+Default output format: json]
+----
+
+NOTE: Access key ID and secret are secretly stored and must be asked for.
+
+
+== Build
+
+Just open XCode, let the packages resolve and build the Data4LifeCrypto Scheme.
+
+
+== Release
+
+A release branches of from `main` branch with following pattern:
+
+* `release/{major}.{minor}.{patch})/prepare-{major}.{minor}.{patch}`
+
+=== Steps
+
+* Update link:CHANGELOG.adoc[CHANGELOG].
+* Update the latest release badge link:assets/images/badges.adoc[HowTo]
+* Run prepare release script (eg. `bundle exec fastlane ios prepare_release version:"1.0.0" api_token:"xxxxxxx"`)
+* On github, publish the release manually by setting the new tag (eg. `v1.0.0`)
+
+NOTE: Prepare release script will fail if there is no new version defined in the changelog
+
+=== Prepare release script steps 
+
+The script executes the following commands:
+
+* Set new version in the README.adoc and project files
+* Do sanity checks (Proper version number in changelog etc.)
+* Build framework and upload it to S3
+* Update Package swift info (url and checksum)
+* Commit and push changes
+* Create GitHub release draft with all of the information from link:CHANGELOG.adoc[CHANGELOG]
+
+[source, bash]
+----
+bundle exec fastlane ios prepare_release version:"1.0.0" api_token:"xxxxxxx"
 ----
 
 == Development Process
@@ -78,39 +128,3 @@ Examples:
 - `feature/remove-not-so-awesome-algorithm`
 - `feature/fix-algorithm-corner-case`
 - `feature/bump-lib-to-1.3.0`
-
-== Release
-
-A release branches of from `main` branch with following pattern:
-
-* `release/{major}.{minor}(.{patch})/prepare-{major}.{minor}.{patch}` while patch is optional
-
-Add following changes:
-
-* Update CHANGELOG.adoc by creating a new Unreleased section and change current unreleased to release version
-* Update README.adoc `crypto-version` to release version
-* Update the latest release badge link:assets/images/badges.adoc[HowTo]
-
-=== Manual steps
-
-Updating link:CHANGELOG.md[CHANGELOG] is the only required manual step, release script expects to find matching version in the CHANGELOG.adoc as the one that used while calling `release_framework` Fastlane action. It takes all of the chnages and uploads them to the GitHub release page.
-
-*Note*: Release script will fail if there is no new version defined in the changelog
-
-=== Running the script
-Folowing command will release new version of framework while handling couple of things:
-
-* Set new project version
-* Set new framework version
-* Set new version in the README.adoc
-* Generate new documentation
-* Do sanity checks (proper branch, proper version number in changelog etc.)
-* Commit changes and create version tag
-* Push new commit and tag to GitHub
-* Create GitHub release page with all of the information for [CHANGELOG.adoc](CHANGELOG.adoc)
-* Upload prebuilt framework to the release page
-
-[source, bash]
-----
-bundle exec fastlane release_framework version:"1.0.0" api_token:"super-secret-GitHub-API-token"
-----

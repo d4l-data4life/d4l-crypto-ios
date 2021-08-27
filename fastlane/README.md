@@ -21,27 +21,17 @@ or alternatively using `brew install fastlane`
 fastlane ios test
 ```
 Run unit tests and upload code coverage
-### ios release_framework
+### ios prepare_release
 ```
-fastlane ios release_framework
+fastlane ios prepare_release
 ```
-Package and release framework
+Prepare release
 
 #### Options
 
  * **`version`** (required): The new version of the framework
 
  * **`api_token`** (required): Github API token
-
- * **`allow_dirty_branch`**: Allows the git branch to be dirty before continuing. Defaults to false
-
- * **`remote`**: The name of the git remote. Defaults to `origin`. (`DEPLOY_REMOTE`)
-
- * **`allow_branch`**: The name of the branch to build from. Defaults to `master`. (`DEPLOY_BRANCH`)
-
- * **`skip_git_pull`**: Skips pulling the git remote. Defaults to false
-
- * **`is_prerelease`**: Marks GitHub release as Pre-release. Defaults to false
 ### ios build_xcframework
 ```
 fastlane ios build_xcframework
@@ -57,9 +47,9 @@ Build any project xcframework
 fastlane ios build_crypto_xcframework
 ```
 Build xcframework for distribution
-### ios gh_release
+### ios create_github_draft
 ```
-fastlane ios gh_release
+fastlane ios create_github_draft
 ```
 Upload to a github release
 ### ios update_plist_versions
@@ -82,11 +72,6 @@ Check license headers
 fastlane ios update_readme_versions
 ```
 Update version numbers in README.adoc
-### ios generate_docs
-```
-fastlane ios generate_docs
-```
-Generate docs per version using Asciidoctor
 
 ----
 
