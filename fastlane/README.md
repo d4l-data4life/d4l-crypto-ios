@@ -56,12 +56,17 @@ Build xcframework for distribution
 ```
 fastlane ios create_github_draft
 ```
-Upload to a github release
+Upload to a github release draft
 ### ios update_plist_versions
 ```
 fastlane ios update_plist_versions
 ```
-Update AppStore and Data4LifeSDK version number in project plists
+Update version number in project plists
+### ios update_readme_versions
+```
+fastlane ios update_readme_versions
+```
+Update version numbers in README.adoc
 ### ios lint
 ```
 fastlane ios lint
@@ -72,11 +77,6 @@ Lint sources using swiftlint and check the license headers
 fastlane ios lint_headers
 ```
 Check license headers
-### ios update_readme_versions
-```
-fastlane ios update_readme_versions
-```
-Update version numbers in README.adoc
 
 ----
 

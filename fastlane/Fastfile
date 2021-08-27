@@ -37,7 +37,8 @@ platform :ios do
     apiToken = options[:api_token]
     remote = "origin"
     changelog = parseAndCheckChangelog("../CHANGELOG.adoc", version)
-     
+    archiveCryptoPath = cryptoFrameworkArchivePath(version)
+    
     unless changelog 
       UI.user_error!("Please add all changes of the version to the CHANGELOG.adoc file")
     end 
@@ -48,7 +49,6 @@ platform :ios do
     build_crypto(version: version)
     
     Dir.chdir("..") do
-      archiveCryptoPath = cryptoFrameworkArchivePath(version)
       upload_archive_to_s3(repository, archiveCryptoPath)
       update_swift_package_file(repository, archiveCryptoPath)
     end 
@@ -73,6 +73,7 @@ platform :ios do
         version: version,
         api_token: apiToken,
         changelog: changelog,
+        archive_path: archiveCryptoPath
       )
     else
       UI.message("When finished, commit your changes.")
@@ -163,7 +164,7 @@ platform :ios do
                               outputPath: "#{name}.xcframework")
   end
 
-  desc "Upload to a github release"
+  desc "Upload to a github release draft"
   lane :create_github_draft do |options|
 
     if options[:version] == nil
@@ -173,6 +174,10 @@ platform :ios do
     if options[:api_token] == nil
       UI.user_error!("Please add required parameter api_token (eg. api_token:\"xxxxxxxxxx\"")
     end
+    
+    if options[:archive_path] == nil
+      UI.user_error!("Please add required parameter archive_path (eg. archive_path:\"xxxxxxxxxx\"")
+    end
 
     changelog = options[:changelog]
     if changelog == nil
@@ -181,6 +186,7 @@ platform :ios do
 
     version = options[:version]
     apiToken = options[:api_token]
+    archivePath = options[:archive_path]
 
     set_github_release(
       repository_name: repository,
@@ -188,11 +194,12 @@ platform :ios do
       name: version,
       tag_name: version,
       description: changelog,
-      is_draft: true
+      is_draft: true,
+      upload_assets: [archivePath]
     )
   end
 
-  desc "Update AppStore and Data4LifeSDK version number in project plists"
+  desc "Update version number in project plists"
   lane :update_plist_versions do |options|
     if options[:version] == nil
        UI.user_error!("Please add required parameter version (eg. version:\"1.0.0\"")
@@ -202,7 +209,7 @@ platform :ios do
     numberOnlyVersion = version.split("-").first.delete_prefix("v")
 
     if numberOnlyVersion.match(/\A\d+(?:\.\d+)*\z/) == nil
-        raise "Could not generate proper AppStore version format".red
+        raise "Could not generate proper version format".red
     end
 
     plists = ["Crypto/Sources/Info.plist", "Crypto/Tests/Info.plist"]
@@ -215,6 +222,25 @@ platform :ios do
         end
       )
     }
+  end
+
+  desc "Update version numbers in README.adoc"
+  lane :update_readme_versions do | options |
+    if !options[:version]
+      raise "No version specified!".red
+    end
+
+    version = options[:version]
+    path = "../README.adoc"
+    numberOnlyVersion = version.split("-").first.delete_prefix("v")
+
+    if numberOnlyVersion.match(/\A\d+(?:\.\d+)*\z/) == nil
+        raise "Could not generate proper AppStore version format".red
+    end
+
+    readmeData = File.read(path)
+    readmeDataUpdated = readmeData.gsub(/ [0-9]+\.[0-9]+\.[0-9]+/, " #{numberOnlyVersion}")
+    File.write(path, readmeDataUpdated)
   end
 
   desc "Lint sources using swiftlint and check the license headers"
@@ -243,28 +269,6 @@ platform :ios do
       autocorrect: autocorrect,
       strict: !autocorrect
     )
-  end
-
-  desc "Update version numbers in README.adoc"
-  lane :update_readme_versions do | options |
-    if !options[:version]
-      raise "No version specified!".red
-    end
-
-    readme_path = "../README.adoc"
-    version = options[:version]
-    numberOnlyVersion = version.split("-").first.delete_prefix("v")
-
-    if numberOnlyVersion.match(/\A\d+(?:\.\d+)*\z/) == nil
-        raise "Could not generate proper AppStore version format".red
-    end
-
-    readme_contents = File.read(readme_path)
-    # Update CocoaPods version number (pattern: `v1.0.0-`)
-    updated = readme_contents.gsub(/v([0-9]+)\.([0-9]+)\.([0-9]+)-/, "v#{numberOnlyVersion}-")
-    # Update GitHub pages version number (pattern: `/1.0.0)`)
-    updated = updated.gsub(/\/([0-9]+)\.([0-9]+)\.([0-9]+)\)/, "\/#{numberOnlyVersion}\)")
-    File.write(readme_path, updated)
   end
 
   def cryptoFrameworkArchivePath(version)
