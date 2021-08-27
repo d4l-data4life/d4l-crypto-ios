@@ -90,7 +90,7 @@ class KeyPairTests: XCTestCase {
         let tag = UUID().uuidString
         try keyPair.store(tag: tag)
         XCTAssertThrowsError(try keyPair.store(tag: tag), "should fail because it already exists") { error in
-            XCTAssertEqual(error as! Data4LifeCryptoError, Data4LifeCryptoError.couldNotStoreKeyPair(tag))
+            XCTAssertEqual(error as? Data4LifeCryptoError, Data4LifeCryptoError.couldNotStoreKeyPair(tag))
         }
         try KeyPair.destroy(tag: tag)
     }
