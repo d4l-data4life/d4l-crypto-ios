@@ -32,14 +32,19 @@ Prepare release
  * **`version`** (required): The new version of the framework
 
  * **`api_token`** (required): Github API token
+### ios update_badge
+```
+fastlane ios update_badge
+```
+Update readme badge
+### ios build_crypto
+```
+fastlane ios build_crypto
+```
+Build xcframework for distribution
 ### ios build_xcframework
 ```
 fastlane ios build_xcframework
-```
-Build xcframework for distribution
-### ios build_project_xcframework
-```
-fastlane ios build_project_xcframework
 ```
 Build any project xcframework
 ### ios build_crypto_xcframework

@@ -86,7 +86,7 @@ platform :ios do
     end
     
     Dir.chdir("..") do
-      sh "curl https://img.shields.io/badge/Release-#{version}-blueviolet.svg -s -o assets/images/badge-release-latest.svg"
+      sh "curl https://img.shields.io/badge/Release-#{options[:version]}-blueviolet.svg -s -o assets/images/badge-release-latest.svg"
     end 
   end 
 

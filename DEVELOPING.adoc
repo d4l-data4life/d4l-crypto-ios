@@ -79,8 +79,7 @@ A release branches of from `main` branch with following pattern:
 
 === Steps
 
-* Update link:CHANGELOG.adoc[CHANGELOG].
-* Update the latest release badge link:assets/images/badges.adoc[HowTo]
+* Update link:CHANGELOG.adoc[CHANGELOG]
 * Run prepare release script (eg. `bundle exec fastlane ios prepare_release version:"1.0.0" api_token:"xxxxxxx"`)
 * On github, publish the release manually by setting the new tag (eg. `v1.0.0`)
 
