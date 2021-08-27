@@ -42,6 +42,11 @@ Prepare release
  * **`version`** (required): The new version of the framework
 
  * **`api_token`** (required): Github API token
+### ios prepare_snapshot
+```
+fastlane ios prepare_snapshot
+```
+Prepare snapshot
 ### ios build_crypto
 ```
 fastlane ios build_crypto

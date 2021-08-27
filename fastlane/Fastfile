@@ -106,6 +106,40 @@ platform :ios do
     end
   end
 
+  desc "Prepare snapshot"
+  lane :prepare_snapshot do 
+ 
+    snapshotName = current_git_branch().split("/").last 
+    remote = "origin"
+    changelog = "### #{snapshotName}"
+    archiveCryptoPath = cryptoFrameworkArchivePath(snapshotName)
+
+    build_crypto(version: snapshotName)
+    
+    Dir.chdir("..") do
+      upload_archive_to_s3(repository, archiveCryptoPath)
+      update_swift_package_file(repository, archiveCryptoPath)
+    end 
+
+    # Ask for confirmation for github
+    if prompt(text: "#{snapshotName} has been prepped for snapshot-release. Would you like to commit, and push #{snapshotName} to #{remote}?".green, boolean: true, ci_input:"y")
+
+      # Push all generated/modified files 
+      git_add
+      git_commit(
+        path: ".",
+        message: "Preparing for the #{snapshotName} release"
+      )
+
+      push_to_git_remote(
+        remote: remote,
+        tags: false
+      )
+    else
+      UI.message("When finished, commit your changes.")
+    end
+  end
+
   desc "Build xcframework for distribution"
   lane :build_crypto do |options|
     if options[:version] == nil
@@ -303,5 +337,11 @@ platform :ios do
 
   def s3_key(repository, path)
     return "#{repository}/#{path}"
+  end
+
+  def current_git_branch()
+    sh "git branch --show-current" do |status, result|
+      return result.chop
+    end 
   end
 end
