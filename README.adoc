@@ -136,6 +136,17 @@ Create new key
 func generate(keySize: KeySize, algorithm: AlgorithmType, type: KeyType) throws -> Key
 ----
 
+Create key from data. It will throw an error if the size of the data does not correspond to the key type.
+
+[source, swift]
+----
+init(data: Data, type: KeyType) throws
+
+// Exg.
+let keyType: KeyType = .data
+let key = Key(data: data, type: keyType)
+----
+
 Loading already existing key
 
 [source, swift]
