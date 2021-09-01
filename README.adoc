@@ -1,5 +1,5 @@
 = Data4Life Crypto iOS SDK
-:library_version: 1.6.0
+:library_version: 1.7.0
 :doctype: article
 :!showtitle:
 :toc: macro
@@ -168,7 +168,7 @@ Example of creating a key and ecrypting data
 [source, swift]
 ----
 let keyType: KeyType = .data
-let keyExchangeFormat = try KeyExhangeFactory.create(type: keyType)
+let keyExchangeFormat = try KeyExchangeFactory.create(type: keyType)
 let key = try Key.generate(keySize: keyExchangeFormat.size, algorithm: keyExchangeFormat.algorithm, type: type)
 let iv = Data(bytes: [...]) // generate random IV
 
