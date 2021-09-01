@@ -21,52 +21,6 @@ or alternatively using `brew install fastlane`
 fastlane ios test
 ```
 Run unit tests and upload code coverage
-### ios release_framework
-```
-fastlane ios release_framework
-```
-Package and release framework
-
-#### Options
-
- * **`version`** (required): The new version of the framework
-
- * **`api_token`** (required): Github API token
-
- * **`allow_dirty_branch`**: Allows the git branch to be dirty before continuing. Defaults to false
-
- * **`remote`**: The name of the git remote. Defaults to `origin`. (`DEPLOY_REMOTE`)
-
- * **`allow_branch`**: The name of the branch to build from. Defaults to `master`. (`DEPLOY_BRANCH`)
-
- * **`skip_git_pull`**: Skips pulling the git remote. Defaults to false
-
- * **`is_prerelease`**: Marks GitHub release as Pre-release. Defaults to false
-### ios build_xcframework
-```
-fastlane ios build_xcframework
-```
-Build xcframework for distribution
-### ios build_project_xcframework
-```
-fastlane ios build_project_xcframework
-```
-Build any project xcframework
-### ios build_crypto_xcframework
-```
-fastlane ios build_crypto_xcframework
-```
-Build xcframework for distribution
-### ios gh_release
-```
-fastlane ios gh_release
-```
-Upload to a github release
-### ios update_plist_versions
-```
-fastlane ios update_plist_versions
-```
-Update AppStore and Data4LifeSDK version number in project plists
 ### ios lint
 ```
 fastlane ios lint
@@ -77,16 +31,52 @@ Lint sources using swiftlint and check the license headers
 fastlane ios lint_headers
 ```
 Check license headers
+### ios prepare_release
+```
+fastlane ios prepare_release
+```
+Prepare release
+
+#### Options
+
+ * **`version`** (required): The new version of the framework
+
+ * **`api_token`** (required): Github API token
+### ios prepare_snapshot
+```
+fastlane ios prepare_snapshot
+```
+Prepare snapshot
+### ios build_crypto
+```
+fastlane ios build_crypto
+```
+Build xcframework for distribution
+### ios build_xcframework
+```
+fastlane ios build_xcframework
+```
+Build any project xcframework
+### ios create_github_draft
+```
+fastlane ios create_github_draft
+```
+Upload to a github release draft
+### ios update_plist_versions
+```
+fastlane ios update_plist_versions
+```
+Update version number in project plists
 ### ios update_readme_versions
 ```
 fastlane ios update_readme_versions
 ```
 Update version numbers in README.adoc
-### ios generate_docs
+### ios update_badge
 ```
-fastlane ios generate_docs
+fastlane ios update_badge
 ```
-Generate docs per version using Asciidoctor
+Update readme badge
 
 ----
 
