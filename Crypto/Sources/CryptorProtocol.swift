@@ -1,4 +1,4 @@
-//  Copyright (c) 2020 D4L data4life gGmbH
+//  Copyright (c) 2021 D4L data4life gGmbH
 //  All rights reserved.
 //  
 //  D4L owns all legal rights, title and interest in and to the Software Development Kit ("SDK"),
@@ -91,25 +91,24 @@ private extension Data4LifeCryptor {
 
 // MARK: - AES No Padding GCM
 private extension Data4LifeCryptor {
-    static func encryptAesNoPaddingGcm(data: Data, key: Data, iv: Data) throws -> Data {
 
+    private static let cryptoKitAESTagLength = 16
+
+    static func encryptAesNoPaddingGcm(data: Data, key: Data, iv: Data) throws -> Data {
         let nonce = try AES.GCM.Nonce(data: iv)
         let symmetricKey = SymmetricKey(data: key)
         let sealedBox = try AES.GCM.seal(data, using: symmetricKey, nonce: nonce)
-
-        guard let combined = sealedBox.combined else {
-            throw Data4LifeCryptoError.couldNotEncryptData
-        }
-
-        return combined.subdata(in: combined.startIndex.advanced(by: iv.count)..<combined.endIndex)
+        return Data(sealedBox.ciphertext.asBytes + sealedBox.tag.asBytes)
     }
 
     static func decryptAesNoPaddingGcm(data: Data, key: Data, iv: Data) throws -> Data {
-        let combinedData = iv + data
-        let sealedBox = try AES.GCM.SealedBox(combined: combinedData)
+        let nonce = try AES.GCM.Nonce(data: iv)
+        let tag = data.asBytes.suffix(Data4LifeCryptor.cryptoKitAESTagLength)
+        let cipherText = data.asBytes.prefix(upTo: data.byteCount - Data4LifeCryptor.cryptoKitAESTagLength)
         let symmetricKey = SymmetricKey(data: key)
-        let unsealedBox = try AES.GCM.open(sealedBox, using: symmetricKey)
-        return unsealedBox
+        let sealedBox = try AES.GCM.SealedBox(nonce: nonce, ciphertext: cipherText, tag: tag)
+        let plainBody = try AES.GCM.open(sealedBox, using: symmetricKey)
+        return plainBody
     }
 }
 

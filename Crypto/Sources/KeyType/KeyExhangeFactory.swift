@@ -1,4 +1,4 @@
-//  Copyright (c) 2020 D4L data4life gGmbH
+//  Copyright (c) 2021 D4L data4life gGmbH
 //  All rights reserved.
 //  
 //  D4L owns all legal rights, title and interest in and to the Software Development Kit ("SDK"),
@@ -25,11 +25,9 @@ public struct KeyExhangeFactory {
 
         switch type {
         case .common, .data, .attachment:
-            let algo = AESAlgorithm(cipher: .aes, padding: .noPadding, blockMode: .gcm, hash: nil)
-            return (algo, 256)
+            return (AESAlgorithm.noPaddingGCM(), 256)
         case .tag:
-            let algo = AESAlgorithm(cipher: .aes, padding: .pkcs7, blockMode: .cbc, hash: nil)
-            return (algo, 256)
+            return (AESAlgorithm.pkcs7CBC(), 256)
         case .appPrivate, .appPublic, .dataDonation:
             return (RSAAlgorithm(), 2048)
         }
