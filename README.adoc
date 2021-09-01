@@ -203,29 +203,31 @@ Helper methods for working with keypairs (wrapper around `Security` framework)
 
 [source, swift]
 ----
-func generate(tag: String, keySize: Int, algorithm: AlgorithmType) throws -> KeyPair
-func load(tag: String, algorithm: AlgorithmType) throws -> KeyPair
-func destroy(tag: String) throws
+static func generate(tag: String, keySize: Int, algorithm: AlgorithmType) throws -> KeyPair
+static func load(tag: String, algorithm: AlgorithmType) throws -> KeyPair
+static func destroy(tag: String) throws
+func store(tag: String) throws
 ----
 
-Exporting public key can be done in one of two formats `PKCS#1` or `SPKI`
+Exporting public key can be done in one of two formats `PKCS#1` or `SPKI` or as `Data`
 
 [source, swift]
 ----
 let keypair = try KeyPair.generate(...)
 
-let pkcs1PubKey: String = keypair.publicKey.asBase64EncodedString()
-let spkiPubKey: String = keypair.publicKey.asSPKIBase64EncodedString()
-let pubKeyData: Data = JSONEncoder().encode(keypair) // will export `SPKI` encoded public key and ignore private key
+let pkcs1PublicKey: String = keypair.publicKey.asBase64EncodedString()
+let spkiPublicKey: String = keypair.publicKey.asSPKIBase64EncodedString()
+let secDataPublicKey: Data = keypair.publicKey.asData()
+let jsonDataPublicKey: Data = JSONEncoder().encode(keypair) // will export `SPKI` encoded public key and ignore private key
 ----
 
-Example of creating keypair and ecrypting data
+Example of creating keypair and encrypting data
 
 [source, swift]
 ----
 let tag: String = "com.example.keypair"
 let keyType: KeyType = .appPrivate
-let keyExchangeFormat = try KeyExhangeFactory.create(type: type)
+let keyExchangeFormat = try KeyExchangeFactory.create(type: type)
 let keypair = try KeyPair.generate(tag: tag, keySize: keyExchangeFormat.size, algorithm: keyExchangeFormat.algorithm)
 
 let plaintext: Data = Data(bytes: [0x00, 0x01, 0x02])
@@ -238,7 +240,7 @@ Decrypt the data
 ----
 let tag: String = "com.example.keypair"
 let keyType: KeyType = .appPrivate
-let keyExchangeFormat = KeyExhangeFactory.create(type: type)
+let keyExchangeFormat = KeyExchangeFactory.create(type: type)
 let keypair = try KeyPair.load(tag: tag, algorithm: keyExchangeFormat.algorithm)
 
 let ciphertext: Data = ... // fetch ciphertext from storage
