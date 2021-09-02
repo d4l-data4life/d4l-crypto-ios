@@ -39,7 +39,7 @@ class Data4LifeKeySignerTests: XCTestCase {
         XCTAssertEqual(isVerified, true)
     }
 
-    func testVerify() throws {
+    func testVerifySalted() throws {
 
         // Given
         let keyPair: KeyPair = try bundle.decodable(fromJSON: "asymDonationServiceKey")
