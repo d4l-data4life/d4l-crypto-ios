@@ -15,20 +15,14 @@
 
 import Foundation
 
-public protocol InitializationVectorGeneratorProtocol {
-    func randomIVData(of size: Int) -> Data
+public protocol CryptorProtocol {
+    static func symEncrypt(key: Key, data: Data, iv: Data) throws -> Data
+    static func symDecrypt(key: Key, data: Data, iv: Data) throws -> Data
+    static func asymEncrypt(key: KeyPair, data: Data) throws -> Data
+    static func asymDecrypt(key: KeyPair, data: Data) throws -> Data
 }
 
-public final class InitializationVectorGenerator: InitializationVectorGeneratorProtocol {
-    public init() {}
-
-    public func randomIVData(of size: Int) -> Data {
-        return randomIV(of: size).asData
-    }
-}
-
-extension InitializationVectorGenerator {
-    private func randomIV(of size: Int) -> [UInt8] {
-        (0..<size).map({ _ in UInt8.random(in: 0...UInt8.max) })
-    }
+public protocol KeyGeneratorProtocol {
+    static func generateAsymKeyPair(algorithm: AlgorithmType, options: KeyOptions) throws -> KeyPair
+    static func generateSymKey(algorithm: AlgorithmType, options: KeyOptions, type: KeyType) throws -> Key
 }

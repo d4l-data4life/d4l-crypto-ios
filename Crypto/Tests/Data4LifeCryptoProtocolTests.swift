@@ -88,7 +88,7 @@ class Data4LifeCryptoProtocolTests: XCTestCase {
         do {
             let keyExchange = try! KeyExchangeFactory.create(type: .data)
             let options = KeyOptions(size: keyExchange.size)
-            let key = try Data4LifeCryptor.generateSymKey(algorithm: keyExchange.algorithm, options: options, type: .data)
+            let key = try Data4LifeKeyGenerator.generateSymKey(algorithm: keyExchange.algorithm, options: options, type: .data)
             XCTAssertEqual(key.algorithm.blockMode, BlockMode.gcm)
             XCTAssertEqual(key.algorithm.cipher, CipherType.aes)
             XCTAssertEqual(key.algorithm.padding, Padding.noPadding)
@@ -106,7 +106,7 @@ class Data4LifeCryptoProtocolTests: XCTestCase {
         do {
             let keyExchange = try! KeyExchangeFactory.create(type: .appPrivate)
             let options = KeyOptions(size: keyExchange.size, tag: UUID().uuidString)
-            let keyPair = try Data4LifeCryptor.generateAsymKeyPair(algorithm: keyExchange.algorithm, options: options)
+            let keyPair = try Data4LifeKeyGenerator.generateAsymKeyPair(algorithm: keyExchange.algorithm, options: options)
             XCTAssertEqual(keyPair.algorithm.blockMode, nil)
             XCTAssertEqual(keyPair.algorithm.cipher, CipherType.rsa)
             XCTAssertEqual(keyPair.algorithm.padding, Padding.oaep)
