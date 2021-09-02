@@ -27,6 +27,8 @@ public enum Data4LifeCryptoError: LocalizedError {
     case couldNotCopySecureRandomBytes
     case couldNotEncryptData
     case couldNotDecryptData
+    case couldNotCreateSignature
+    case couldNotVerifySignature
     case keyDoesNotMatchExpectedSize
     case keyIsNotRSAKey
     case keyIsNotPublicKey
@@ -58,6 +60,10 @@ extension Data4LifeCryptoError: CustomStringConvertible {
             return "Could not store key pair with tag: \(tag)"
         case .couldNotCopySecureRandomBytes:
             return "Could not copy secure random bytes"
+        case .couldNotVerifySignature:
+            return "Could not verify signature"
+        case .couldNotCreateSignature:
+            return "Could not create signature"
         case .keyDoesNotMatchExpectedSize:
             return "Provided key does not match expected size"
         case .keyIsNotRSAKey:

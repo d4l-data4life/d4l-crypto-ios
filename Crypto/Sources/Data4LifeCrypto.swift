@@ -12,6 +12,7 @@
 //  If you are interested in licensing the SDK for your own applications/third-party
 //  applications and/or if you’d like to contribute to the development of the SDK, please
 //  contact D4L by email to help@data4life.care.
+//
 
 import Foundation
 
@@ -20,6 +21,11 @@ public protocol CryptorProtocol {
     static func symDecrypt(key: Key, data: Data, iv: Data) throws -> Data
     static func asymEncrypt(key: KeyPair, data: Data) throws -> Data
     static func asymDecrypt(key: KeyPair, data: Data) throws -> Data
+}
+
+public protocol SignerProtocol {
+    static func sign(data: Data, privateKey: AsymmetricKey, salt: SigningSalt) throws -> Data
+    static func verify(data: Data, against signature: Data, publicKey: AsymmetricKey, salt: SigningSalt) throws -> Bool
 }
 
 public protocol KeyGeneratorProtocol {
