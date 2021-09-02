@@ -39,6 +39,24 @@ class Data4LifeKeySignerTests: XCTestCase {
         XCTAssertEqual(isVerified, true)
     }
 
+    func testSignAndVerifyWithUnsalted() throws {
+
+        // Given
+        let keyPair: KeyPair = try bundle.decodable(fromJSON: "asymDonationServiceKey")
+        let data = "Hello World!".data(using: .utf8)!
+
+        // When
+        let signature = try Data4LifeSigner.sign(data: data,
+                                                 privateKey: keyPair.privateKey,
+                                                 salt: .unsalted)
+
+        let isVerified = try Data4LifeSigner.verify(data: data,
+                                                    against: signature,
+                                                    publicKey: keyPair.publicKey,
+                                                    salt: .unsalted)
+        XCTAssertEqual(isVerified, true)
+    }
+
     func testVerifySalted() throws {
 
         // Given
@@ -52,6 +70,24 @@ class Data4LifeKeySignerTests: XCTestCase {
                                                     against: signature,
                                                     publicKey: keyPair.publicKey,
                                                     salt: .salted)
+
+        // Then
+        XCTAssertEqual(isVerified, true)
+    }
+
+    func testVerifyUnsalted() throws {
+
+        // Given
+        let keyPair: KeyPair = try bundle.decodable(fromJSON: "asymDonationServiceKey")
+        let data = "Hello World!".data(using: .utf8)!
+        let signatureString = String(data: bundle.data(forResource: "ExampleSignature0", withExtension: "txt")!, encoding: .utf8)!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let signature = Data(base64Encoded: signatureString)!
+
+        // When
+        let isVerified = try Data4LifeSigner.verify(data: data,
+                                                    against: signature,
+                                                    publicKey: keyPair.publicKey,
+                                                    salt: .unsalted)
 
         // Then
         XCTAssertEqual(isVerified, true)

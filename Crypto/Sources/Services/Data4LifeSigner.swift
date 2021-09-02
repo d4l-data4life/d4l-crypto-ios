@@ -15,14 +15,25 @@
 
 import Foundation
 import CommonCrypto
+import SwCrypt
 
 public struct Data4LifeSigner: SignerProtocol {
 
     public static func sign(data: Data, privateKey: AsymmetricKey, salt: SigningSalt) throws -> Data {
         switch salt {
         case .unsalted:
-            #warning("TODO")
-            fatalError("Not implemented yet")
+            let keyString = """
+            -----BEGIN PRIVATE KEY-----
+            \(try privateKey.asBase64EncodedString())
+            -----END PRIVATE KEY-----
+            """
+            let derPrivateKey = try SwKeyConvert.PrivateKey.pemToPKCS1DER(keyString)
+            let signature = try CC.RSA.sign(data,
+                                            derKey: derPrivateKey,
+                                            padding: .pss,
+                                            digest: .sha256,
+                                            saltLen: 0)
+            return signature
         case .salted:
             var error: Unmanaged<CFError>?
             let signedMessage = SecKeyCreateSignature(privateKey.value,
@@ -49,8 +60,19 @@ public struct Data4LifeSigner: SignerProtocol {
 
         switch salt {
         case .unsalted:
-            #warning("TODO")
-            fatalError("Not implemented yet")
+            let keyString = """
+            -----BEGIN PUBLIC KEY-----
+            \(try publicKey.asBase64EncodedString())
+            -----END PUBLIC KEY-----
+            """
+            let derPublicKey = try SwKeyConvert.PublicKey.pemToPKCS1DER(keyString)
+            let isVerified = try CC.RSA.verify(data,
+                                               derKey: derPublicKey,
+                                               padding: .pss,
+                                               digest: .sha256,
+                                               saltLen: 0,
+                                               signedData: signature)
+            return isVerified
         case .salted:
             var error: Unmanaged<CFError>?
             let isVerified = SecKeyVerifySignature(publicKey.value,

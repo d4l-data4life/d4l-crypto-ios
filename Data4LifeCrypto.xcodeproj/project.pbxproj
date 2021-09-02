@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,8 @@
 		3661D4F326E10FA800BC51F3 /* Data4LifeSignerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3661D4F226E10FA800BC51F3 /* Data4LifeSignerTests.swift */; };
 		3661D4F626E1118100BC51F3 /* ExampleSignature32.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3661D4F526E1118100BC51F3 /* ExampleSignature32.txt */; };
 		3661D4F826E1124700BC51F3 /* asymDonationServiceKey.json in Resources */ = {isa = PBXBuildFile; fileRef = 3661D4F726E1124700BC51F3 /* asymDonationServiceKey.json */; };
+		3661D4FB26E11DFF00BC51F3 /* SwCrypt in Frameworks */ = {isa = PBXBuildFile; productRef = 3661D4FA26E11DFF00BC51F3 /* SwCrypt */; };
+		3661D4FD26E1226800BC51F3 /* ExampleSignature0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3661D4FC26E1226800BC51F3 /* ExampleSignature0.txt */; };
 		36FA37D626D6667B00DDCC35 /* Data4LifeCryptoHostAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FA37D526D6667B00DDCC35 /* Data4LifeCryptoHostAppApp.swift */; };
 		36FA37D826D6667B00DDCC35 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FA37D726D6667B00DDCC35 /* ContentView.swift */; };
 		36FA37DA26D6667C00DDCC35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36FA37D926D6667C00DDCC35 /* Assets.xcassets */; };
@@ -89,6 +91,7 @@
 		3661D4F226E10FA800BC51F3 /* Data4LifeSignerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data4LifeSignerTests.swift; sourceTree = "<group>"; };
 		3661D4F526E1118100BC51F3 /* ExampleSignature32.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ExampleSignature32.txt; sourceTree = "<group>"; };
 		3661D4F726E1124700BC51F3 /* asymDonationServiceKey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = asymDonationServiceKey.json; sourceTree = "<group>"; };
+		3661D4FC26E1226800BC51F3 /* ExampleSignature0.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ExampleSignature0.txt; sourceTree = "<group>"; };
 		36FA37D326D6667B00DDCC35 /* Data4LifeCryptoHostApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Data4LifeCryptoHostApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36FA37D526D6667B00DDCC35 /* Data4LifeCryptoHostAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data4LifeCryptoHostAppApp.swift; sourceTree = "<group>"; };
 		36FA37D726D6667B00DDCC35 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -151,6 +154,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3661D4FB26E11DFF00BC51F3 /* SwCrypt in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				3661D4F526E1118100BC51F3 /* ExampleSignature32.txt */,
+				3661D4FC26E1226800BC51F3 /* ExampleSignature0.txt */,
 				3661D4F726E1124700BC51F3 /* asymDonationServiceKey.json */,
 			);
 			path = Signatures;
@@ -483,6 +488,7 @@
 			);
 			name = Data4LifeCrypto;
 			packageProductDependencies = (
+				3661D4FA26E11DFF00BC51F3 /* SwCrypt */,
 			);
 			productName = HCKit;
 			productReference = CD109095225B88BE00325389 /* Data4LifeCrypto.framework */;
@@ -542,6 +548,7 @@
 			);
 			mainGroup = 8374639C1E854E7500AB500F;
 			packageReferences = (
+				3661D4F926E11DFF00BC51F3 /* XCRemoteSwiftPackageReference "SwCrypt" */,
 			);
 			productRefGroup = 837463A71E854E7500AB500F /* Products */;
 			projectDirPath = "";
@@ -585,6 +592,7 @@
 				CD1091A7225B8A0A00325389 /* symTagDecrypt.json in Resources */,
 				CD1091AA225B8A0A00325389 /* symCommonEncrypt.json in Resources */,
 				36FA384426D8E82E00DDCC35 /* asymDonationKey.json in Resources */,
+				3661D4FD26E1226800BC51F3 /* ExampleSignature0.txt in Resources */,
 				CD1091A6225B8A0A00325389 /* asymDecrypt.json in Resources */,
 				CD1091A8225B8A0A00325389 /* symCommonExchangeKey.json in Resources */,
 				CD1091AC225B8A0A00325389 /* asymPrivateExchangeKeyPKCS1.json in Resources */,
@@ -683,7 +691,10 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Data4LifeCryptoHostApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = de.gesundheitscloud.HCSDKIntegration;
@@ -711,7 +722,10 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Data4LifeCryptoHostApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = de.gesundheitscloud.HCSDKIntegration;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -833,7 +847,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -860,7 +875,11 @@
 				INFOPLIST_FILE = Crypto/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.6.0;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -no-serialize-debugging-options";
 				PRODUCT_BUNDLE_IDENTIFIER = de.gesundheitscloud.HCCrypto;
@@ -893,7 +912,11 @@
 				INFOPLIST_FILE = Crypto/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.6.0;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -no-serialize-debugging-options";
 				PRODUCT_BUNDLE_IDENTIFIER = de.gesundheitscloud.HCCrypto;
@@ -920,7 +943,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Crypto/Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = de.gesundheitscloud.HCCryptoTests2;
@@ -946,7 +973,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Crypto/Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = de.gesundheitscloud.HCCryptoTests2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -997,6 +1028,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3661D4F926E11DFF00BC51F3 /* XCRemoteSwiftPackageReference "SwCrypt" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/soyersoyer/SwCrypt";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3661D4FA26E11DFF00BC51F3 /* SwCrypt */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3661D4F926E11DFF00BC51F3 /* XCRemoteSwiftPackageReference "SwCrypt" */;
+			productName = SwCrypt;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8374639D1E854E7500AB500F /* Project object */;
 }
