@@ -16,7 +16,7 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "Data4LifeCryptoRSAPSS",
-                 url: "https://github.com/d4l-data4life/d4l-crypto-rsa-pss-ios.git",
+                 url: "https://d4l-ios-artifact-repository.s3.eu-central-1.amazonaws.com/d4l-data4life/d4l-crypto-ios/Data4LifeCrypto-xcframework-1.7.0.zip",
                  .branch("feature/shrink-to-package-only"))
 
     ],
@@ -29,8 +29,8 @@ let package = Package(
                 path: "SwiftPMDependencyTarget/RSAPSS"),
         .binaryTarget(
             name: "Data4LifeCrypto",
-            url: "https://d4l-ios-artifact-repository.s3.eu-central-1.amazonaws.com/d4l-data4life/d4l-crypto-ios/Data4LifeCrypto-xcframework-add-sign-algorithm-unsalted.zip",
-            checksum: "0757b891c37c96caececa334660655c907b7e7d7361d5296cfd20a195afefeb3"
+            url: "https://d4l-ios-artifact-repository.s3.eu-central-1.amazonaws.com/d4l-data4life/d4l-crypto-ios/Data4LifeCrypto-xcframework-1.7.0.zip",
+            checksum: "792de8871a84dce36abb1a8e3e8e8edfe3184a82fc0414f50f4577a17384dbc2"
         ),
         .testTarget(name: "Data4LifeCryptoTests",
                     dependencies: ["Data4LifeCrypto"],
