@@ -30,7 +30,7 @@ let package = Package(
         .binaryTarget(
             name: "Data4LifeCrypto",
             url: "https://d4l-ios-artifact-repository.s3.eu-central-1.amazonaws.com/d4l-data4life/d4l-crypto-ios/Data4LifeCrypto-xcframework-1.7.0.zip",
-            checksum: "792de8871a84dce36abb1a8e3e8e8edfe3184a82fc0414f50f4577a17384dbc2"
+            checksum: "998813cdfe12061d42dc909b0510a439aaf14a6de967a858ba253cc2b8e29c57"
         ),
         .testTarget(name: "Data4LifeCryptoTests",
                     dependencies: ["Data4LifeCrypto"],
