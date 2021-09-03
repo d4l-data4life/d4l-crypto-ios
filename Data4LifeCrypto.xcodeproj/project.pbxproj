@@ -17,8 +17,8 @@
 		3661D4F326E10FA800BC51F3 /* Data4LifeSignerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3661D4F226E10FA800BC51F3 /* Data4LifeSignerTests.swift */; };
 		3661D4F626E1118100BC51F3 /* ExampleSignature32.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3661D4F526E1118100BC51F3 /* ExampleSignature32.txt */; };
 		3661D4F826E1124700BC51F3 /* asymDonationServiceKey.json in Resources */ = {isa = PBXBuildFile; fileRef = 3661D4F726E1124700BC51F3 /* asymDonationServiceKey.json */; };
-		3661D4FB26E11DFF00BC51F3 /* SwCrypt in Frameworks */ = {isa = PBXBuildFile; productRef = 3661D4FA26E11DFF00BC51F3 /* SwCrypt */; };
 		3661D4FD26E1226800BC51F3 /* ExampleSignature0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3661D4FC26E1226800BC51F3 /* ExampleSignature0.txt */; };
+		367B639326E238A70020C4B5 /* Data4LifeCryptoRSAPSS in Frameworks */ = {isa = PBXBuildFile; productRef = 367B639226E238A70020C4B5 /* Data4LifeCryptoRSAPSS */; };
 		36FA37D626D6667B00DDCC35 /* Data4LifeCryptoHostAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FA37D526D6667B00DDCC35 /* Data4LifeCryptoHostAppApp.swift */; };
 		36FA37D826D6667B00DDCC35 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FA37D726D6667B00DDCC35 /* ContentView.swift */; };
 		36FA37DA26D6667C00DDCC35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36FA37D926D6667C00DDCC35 /* Assets.xcassets */; };
@@ -154,7 +154,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3661D4FB26E11DFF00BC51F3 /* SwCrypt in Frameworks */,
+				367B639326E238A70020C4B5 /* Data4LifeCryptoRSAPSS in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,7 +488,7 @@
 			);
 			name = Data4LifeCrypto;
 			packageProductDependencies = (
-				3661D4FA26E11DFF00BC51F3 /* SwCrypt */,
+				367B639226E238A70020C4B5 /* Data4LifeCryptoRSAPSS */,
 			);
 			productName = HCKit;
 			productReference = CD109095225B88BE00325389 /* Data4LifeCrypto.framework */;
@@ -548,7 +548,7 @@
 			);
 			mainGroup = 8374639C1E854E7500AB500F;
 			packageReferences = (
-				3661D4F926E11DFF00BC51F3 /* XCRemoteSwiftPackageReference "SwCrypt" */,
+				367B639126E238A70020C4B5 /* XCRemoteSwiftPackageReference "d4l-crypto-rsa-pss-ios" */,
 			);
 			productRefGroup = 837463A71E854E7500AB500F /* Products */;
 			projectDirPath = "";
@@ -1030,21 +1030,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3661D4F926E11DFF00BC51F3 /* XCRemoteSwiftPackageReference "SwCrypt" */ = {
+		367B639126E238A70020C4B5 /* XCRemoteSwiftPackageReference "d4l-crypto-rsa-pss-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/soyersoyer/SwCrypt";
+			repositoryURL = "https://github.com/d4l-data4life/d4l-crypto-rsa-pss-ios";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.1.4;
+				branch = "feature/shrink-to-package-only";
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3661D4FA26E11DFF00BC51F3 /* SwCrypt */ = {
+		367B639226E238A70020C4B5 /* Data4LifeCryptoRSAPSS */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3661D4F926E11DFF00BC51F3 /* XCRemoteSwiftPackageReference "SwCrypt" */;
-			productName = SwCrypt;
+			package = 367B639126E238A70020C4B5 /* XCRemoteSwiftPackageReference "d4l-crypto-rsa-pss-ios" */;
+			productName = Data4LifeCryptoRSAPSS;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -2,12 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "SwCrypt",
-        "repositoryURL": "https://github.com/soyersoyer/SwCrypt",
+        "package": "Data4LifeCryptoRSAPSS",
+        "repositoryURL": "https://github.com/d4l-data4life/d4l-crypto-rsa-pss-ios",
         "state": {
-          "branch": null,
-          "revision": "d18cf90973a32dc0d28f94eec91faf14ae8b4443",
-          "version": "5.1.4"
+          "branch": "feature/shrink-to-package-only",
+          "revision": "f39e27ded782af31e745c13112fabcbdf06f9515",
+          "version": null
         }
       }
     ]

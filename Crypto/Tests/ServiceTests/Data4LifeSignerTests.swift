@@ -30,12 +30,12 @@ class Data4LifeKeySignerTests: XCTestCase {
         // When
         let signature = try Data4LifeSigner.sign(data: data,
                                                   privateKey: keyPair.privateKey,
-                                                  salt: .salted)
+                                                  isSalted: true)
 
         let isVerified = try Data4LifeSigner.verify(data: data,
                                                     against: signature,
                                                     publicKey: keyPair.publicKey,
-                                                    salt: .salted)
+                                                    isSalted: true)
         XCTAssertEqual(isVerified, true)
     }
 
@@ -48,12 +48,12 @@ class Data4LifeKeySignerTests: XCTestCase {
         // When
         let signature = try Data4LifeSigner.sign(data: data,
                                                  privateKey: keyPair.privateKey,
-                                                 salt: .unsalted)
+                                                 isSalted: false)
 
         let isVerified = try Data4LifeSigner.verify(data: data,
                                                     against: signature,
                                                     publicKey: keyPair.publicKey,
-                                                    salt: .unsalted)
+                                                    isSalted: false)
         XCTAssertEqual(isVerified, true)
     }
 
@@ -69,7 +69,7 @@ class Data4LifeKeySignerTests: XCTestCase {
         let isVerified = try Data4LifeSigner.verify(data: data,
                                                     against: signature,
                                                     publicKey: keyPair.publicKey,
-                                                    salt: .salted)
+                                                    isSalted: true)
 
         // Then
         XCTAssertEqual(isVerified, true)
@@ -87,7 +87,7 @@ class Data4LifeKeySignerTests: XCTestCase {
         let isVerified = try Data4LifeSigner.verify(data: data,
                                                     against: signature,
                                                     publicKey: keyPair.publicKey,
-                                                    salt: .unsalted)
+                                                    isSalted: false)
 
         // Then
         XCTAssertEqual(isVerified, true)

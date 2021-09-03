@@ -24,8 +24,8 @@ public protocol CryptorProtocol {
 }
 
 public protocol SignerProtocol {
-    static func sign(data: Data, privateKey: AsymmetricKey, salt: SigningSalt) throws -> Data
-    static func verify(data: Data, against signature: Data, publicKey: AsymmetricKey, salt: SigningSalt) throws -> Bool
+    static func sign(data: Data, privateKey: AsymmetricKey, isSalted: Bool) throws -> Data
+    static func verify(data: Data, against signature: Data,publicKey: AsymmetricKey, isSalted: Bool) throws -> Bool
 }
 
 public protocol KeyGeneratorProtocol {

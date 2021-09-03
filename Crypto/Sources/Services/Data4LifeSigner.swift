@@ -15,76 +15,32 @@
 
 import Foundation
 import CommonCrypto
-import SwCrypt
+@_implementationOnly import Data4LifeCryptoRSAPSS
 
 public struct Data4LifeSigner: SignerProtocol {
 
-    public static func sign(data: Data, privateKey: AsymmetricKey, salt: SigningSalt) throws -> Data {
-        switch salt {
-        case .unsalted:
-            let keyString = """
-            -----BEGIN PRIVATE KEY-----
-            \(try privateKey.asBase64EncodedString())
-            -----END PRIVATE KEY-----
-            """
-            let derPrivateKey = try SwKeyConvert.PrivateKey.pemToPKCS1DER(keyString)
-            let signature = try CC.RSA.sign(data,
-                                            derKey: derPrivateKey,
-                                            padding: .pss,
-                                            digest: .sha256,
-                                            saltLen: 0)
-            return signature
-        case .salted:
-            var error: Unmanaged<CFError>?
-            let signedMessage = SecKeyCreateSignature(privateKey.value,
-                                                      .rsaSignatureMessagePSSSHA256,
-                                                      data as CFData,
-                                                      &error) as Data?
-
-            if let _ = error?.takeRetainedValue() {
-                throw Data4LifeCryptoError.couldNotCreateSignature
-            }
-
-            guard let signedMessage = signedMessage else {
-                throw Data4LifeCryptoError.couldNotCreateSignature
-            }
-
-            return signedMessage
+    public static func sign(data: Data, privateKey: AsymmetricKey, isSalted: Bool) throws -> Data {
+        do {
+            return try D4L.RSAPSS.sign(data: data,
+                                       privateKey: privateKey.value,
+                                       saltType: isSalted ? .salted : .unsalted)
+        } catch {
+            throw Data4LifeCryptoError.couldNotCreateSignature
         }
     }
 
     public static func verify(data: Data,
                               against signature: Data,
                               publicKey: AsymmetricKey,
-                              salt: SigningSalt) throws -> Bool {
+                              isSalted: Bool) throws -> Bool {
 
-        switch salt {
-        case .unsalted:
-            let keyString = """
-            -----BEGIN PUBLIC KEY-----
-            \(try publicKey.asBase64EncodedString())
-            -----END PUBLIC KEY-----
-            """
-            let derPublicKey = try SwKeyConvert.PublicKey.pemToPKCS1DER(keyString)
-            let isVerified = try CC.RSA.verify(data,
-                                               derKey: derPublicKey,
-                                               padding: .pss,
-                                               digest: .sha256,
-                                               saltLen: 0,
-                                               signedData: signature)
-            return isVerified
-        case .salted:
-            var error: Unmanaged<CFError>?
-            let isVerified = SecKeyVerifySignature(publicKey.value,
-                                                   .rsaSignatureMessagePSSSHA256,
-                                                   data as NSData,
-                                                   signature as NSData,
-                                                   &error)
-            if let error = error?.takeRetainedValue() {
-                throw Data4LifeCryptoError.couldNotVerifySignature
-            }
-
-            return isVerified
+        do {
+            return try D4L.RSAPSS.verify(data: data,
+                                         against: signature,
+                                         publicKey: publicKey.value,
+                                         saltType: isSalted ? .salted : .unsalted)
+        } catch {
+            throw Data4LifeCryptoError.couldNotVerifySignature
         }
     }
 }
