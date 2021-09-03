@@ -15,7 +15,6 @@
 //
 
 import SwiftUI
-import Data4LifeCrypto
 
 struct ContentView: View {
     var body: some View {
