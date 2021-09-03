@@ -52,6 +52,7 @@ See link:{link-repository}/compare/v1.7.0...main[changeset]
 
 * Possibility to store KeyPair with a tag in keychain 
 * Publicly exposed AESAlgorithm with 2 factory methods
+* Added methods for sign and verify with RSA PSS, using SHA256 salted (32) or unsalted (0)
 
 === Fixed
 
