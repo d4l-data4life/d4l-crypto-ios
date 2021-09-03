@@ -5,9 +5,9 @@
         "package": "Data4LifeCryptoRSAPSS",
         "repositoryURL": "https://github.com/d4l-data4life/d4l-crypto-rsa-pss-ios",
         "state": {
-          "branch": "feature/shrink-to-package-only",
-          "revision": "f39e27ded782af31e745c13112fabcbdf06f9515",
-          "version": null
+          "branch": null,
+          "revision": "df6623aaf461f18b03cb1e3884792ecd7b32efdb",
+          "version": "1.0.0"
         }
       }
     ]
