@@ -12,7 +12,6 @@
 		3661D4E426E1063100BC51F3 /* Data4LifeCryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3661D4E326E1063100BC51F3 /* Data4LifeCryptor.swift */; };
 		3661D4E626E1063C00BC51F3 /* Data4LifeKeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3661D4E526E1063C00BC51F3 /* Data4LifeKeyGenerator.swift */; };
 		3661D4E826E1085F00BC51F3 /* Data4LifeSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3661D4E726E1085F00BC51F3 /* Data4LifeSigner.swift */; };
-		3661D4EB26E10DE500BC51F3 /* SigningSalt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3661D4EA26E10DE500BC51F3 /* SigningSalt.swift */; };
 		3661D4F126E10F6100BC51F3 /* Data4LifeKeyGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3661D4EF26E10F5E00BC51F3 /* Data4LifeKeyGeneratorTests.swift */; };
 		3661D4F326E10FA800BC51F3 /* Data4LifeSignerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3661D4F226E10FA800BC51F3 /* Data4LifeSignerTests.swift */; };
 		3661D4F626E1118100BC51F3 /* ExampleSignature32.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3661D4F526E1118100BC51F3 /* ExampleSignature32.txt */; };
@@ -86,7 +85,6 @@
 		3661D4E326E1063100BC51F3 /* Data4LifeCryptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data4LifeCryptor.swift; sourceTree = "<group>"; };
 		3661D4E526E1063C00BC51F3 /* Data4LifeKeyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data4LifeKeyGenerator.swift; sourceTree = "<group>"; };
 		3661D4E726E1085F00BC51F3 /* Data4LifeSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data4LifeSigner.swift; sourceTree = "<group>"; };
-		3661D4EA26E10DE500BC51F3 /* SigningSalt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningSalt.swift; sourceTree = "<group>"; };
 		3661D4EF26E10F5E00BC51F3 /* Data4LifeKeyGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data4LifeKeyGeneratorTests.swift; sourceTree = "<group>"; };
 		3661D4F226E10FA800BC51F3 /* Data4LifeSignerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data4LifeSignerTests.swift; sourceTree = "<group>"; };
 		3661D4F526E1118100BC51F3 /* ExampleSignature32.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ExampleSignature32.txt; sourceTree = "<group>"; };
@@ -188,7 +186,6 @@
 				CD10909F225B893A00325389 /* Key */,
 				CD109098225B893A00325389 /* KeyPair */,
 				CD1090A3225B893A00325389 /* KeyType */,
-				3661D4EA26E10DE500BC51F3 /* SigningSalt.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -637,7 +634,6 @@
 				CD1090CA225B893A00325389 /* Key+Codable.swift in Sources */,
 				CD1090BE225B893A00325389 /* AsymmetricKey+PKCS8.swift in Sources */,
 				CD1090DF225B893A00325389 /* Array+Byte.swift in Sources */,
-				3661D4EB26E10DE500BC51F3 /* SigningSalt.swift in Sources */,
 				CDCB9DE3225F563E004A565F /* SecKey+Data.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

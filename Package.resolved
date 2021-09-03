@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Data4LifeCryptoRSAPSS",
+        "repositoryURL": "https://github.com/d4l-data4life/d4l-crypto-rsa-pss-ios.git",
+        "state": {
+          "branch": "feature/shrink-to-package-only",
+          "revision": "f39e27ded782af31e745c13112fabcbdf06f9515",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
