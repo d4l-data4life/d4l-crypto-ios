@@ -163,7 +163,7 @@ let key = Key.generate(...)
 let keyData = try JSONEncoder().encode(key)
 ----
 
-Example of creating a key and ecrypting data
+Example of creating a key and encrypting data
 
 [source, swift]
 ----
@@ -203,7 +203,7 @@ Helper methods for working with keypairs (wrapper around `Security` framework)
 
 [source, swift]
 ----
-static func generate(tag: String, keySize: Int, algorithm: AlgorithmType) throws -> KeyPair
+static func generate(tag: String, keySize: Int, algorithm: AlgorithmType, isPermanent: Bool = true) throws -> KeyPair
 static func load(tag: String, algorithm: AlgorithmType) throws -> KeyPair
 static func destroy(tag: String) throws
 func store(tag: String) throws
