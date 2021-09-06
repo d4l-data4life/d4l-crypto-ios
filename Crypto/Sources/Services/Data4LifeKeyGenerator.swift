@@ -21,7 +21,7 @@ public struct Data4LifeKeyGenerator: KeyGeneratorProtocol {
         guard let tag = options.tag else {
             throw Data4LifeCryptoError.missingKeyPairTagOption
         }
-        return try KeyPair.generate(tag: tag, keySize: options.size, algorithm: algorithm)
+        return try KeyPair.generate(tag: tag, keySize: options.size, algorithm: algorithm, isPermanent: options.isPermanent)
     }
 
     public static func generateSymKey(algorithm: AlgorithmType, options: KeyOptions, type: KeyType) throws -> Key {
