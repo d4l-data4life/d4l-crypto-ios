@@ -40,7 +40,7 @@ class Data4LifeKeyGeneratorTests: XCTestCase {
     func testGenerateKeyPair() {
         do {
             let keyExchange = try! KeyExchangeFactory.create(type: .appPrivate)
-            let options = KeyOptions(size: keyExchange.size, tag: UUID().uuidString)
+            let options = KeyOptions(size: keyExchange.size, tag: UUID().uuidString, isPermanent: false)
             let keyPair = try Data4LifeKeyGenerator.generateAsymKeyPair(algorithm: keyExchange.algorithm, options: options)
             XCTAssertEqual(keyPair.algorithm.blockMode, nil)
             XCTAssertEqual(keyPair.algorithm.cipher, CipherType.rsa)

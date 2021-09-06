@@ -20,8 +20,38 @@ class KeyPairTests: XCTestCase {
 
     private let bundle = Foundation.Bundle.current
 
-    #if SWIFT_PACKAGE
-    #else
+    func testGenerateKeyPairAndExportPubKeyAsSPKI() {
+        let tag = UUID().uuidString
+        let size = 2048
+        let algo = RSAAlgorithm()
+
+        do {
+            let keyPair = try KeyPair.generate(tag: tag, keySize: size, algorithm: algo, isPermanent: false)
+            _ = try keyPair.publicKey.asSPKIBase64EncodedString()
+        } catch {
+            XCTFail(error.localizedDescription)
+        }
+    }
+
+    func testGenerateKeyPairAndFailExportingAsSPKI() {
+        let tag = UUID().uuidString
+        let size = 1024 // there is no SPKI header for 1024 key, but it's possible to create keypair
+        let algo = RSAAlgorithm()
+
+        do {
+            let keyPair = try KeyPair.generate(tag: tag, keySize: size, algorithm: algo, isPermanent: false)
+            _ = try keyPair.publicKey.asSPKIBase64EncodedString()
+            XCTFail("Should not generate SPKI public key")
+        } catch {
+            XCTAssertEqual(error as? Data4LifeCryptoError, .missingHeaderBytesForKeySize(1024))
+        }
+    }
+}
+
+#if SWIFT_PACKAGE
+#else
+extension KeyPairTests {
+
     func testGenerateLoadAndDestroyKeyPair() {
         do {
             let tag = UUID().uuidString
@@ -37,38 +67,8 @@ class KeyPairTests: XCTestCase {
             XCTAssertEqual(generatedKeyPair.algorithm.cipher.rawValue, loadedKeyPair.algorithm.cipher.rawValue)
             XCTAssertEqual(generatedKeyPair.algorithm.padding.rawValue, loadedKeyPair.algorithm.padding.rawValue)
             XCTAssertEqual(generatedKeyPair.algorithm.hash?.rawValue, loadedKeyPair.algorithm.hash?.rawValue)
-
-            try KeyPair.destroy(tag: tag)
         } catch(let error) {
             XCTFail(error.localizedDescription)
-        }
-    }
-
-    func testGenerateKeyPairAndExportPubKeyAsSPKI() {
-        let tag = UUID().uuidString
-        let size = 2048
-        let algo = RSAAlgorithm()
-
-        do {
-            let keyPair = try KeyPair.generate(tag: tag, keySize: size, algorithm: algo)
-            _ = try keyPair.publicKey.asSPKIBase64EncodedString()
-            try KeyPair.destroy(tag: tag)
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
-    }
-
-    func testGenerateKeyPairAndFailExportingAsSPKI() {
-        let tag = UUID().uuidString
-        let size = 1024 // there is no SPKI header for 1024 key, but it's possible to create keypair
-        let algo = RSAAlgorithm()
-
-        do {
-            let keyPair = try KeyPair.generate(tag: tag, keySize: size, algorithm: algo)
-            _ = try keyPair.publicKey.asSPKIBase64EncodedString()
-            XCTFail("Should not generate SPKI public key")
-        } catch {
-            try! KeyPair.destroy(tag: tag)
         }
     }
 
@@ -94,5 +94,5 @@ class KeyPairTests: XCTestCase {
         }
         try KeyPair.destroy(tag: tag)
     }
-    #endif
 }
+#endif

@@ -23,7 +23,7 @@ public protocol KeyPairType {
     var algorithm: AlgorithmType { get }
     var keySize: KeySize { get }
 
-    static func generate(tag: String, keySize: Int, algorithm: AlgorithmType) throws -> Self
+    static func generate(tag: String, keySize: Int, algorithm: AlgorithmType, isPermanent: Bool) throws -> Self
     static func load(tag: String, algorithm: AlgorithmType) throws -> Self
     static func destroy(tag: String) throws
 }
@@ -88,8 +88,8 @@ public struct KeyPair: KeyPairType {
         }
     }
 
-    public static func generate(tag: String, keySize: Int, algorithm: AlgorithmType) throws -> KeyPair {
-        let privateKeyAttributes: Attributes = [kSecAttrIsPermanent as String: true,
+    public static func generate(tag: String, keySize: Int, algorithm: AlgorithmType, isPermanent: Bool = true) throws -> KeyPair {
+        let privateKeyAttributes: Attributes = [kSecAttrIsPermanent as String: isPermanent,
                                                 kSecAttrApplicationTag as String: tag]
 
         let attributes: Attributes = [kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
