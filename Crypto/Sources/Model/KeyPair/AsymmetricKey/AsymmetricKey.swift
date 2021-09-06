@@ -23,13 +23,15 @@ public enum AsymmetricKeyType: String {
 public struct AsymmetricKey {
     public let value: SecKey
     public let type: AsymmetricKeyType
+    public let algorithm: AlgorithmType
 
-    init(value: SecKey, type: AsymmetricKeyType ) {
+    init(value: SecKey, type: AsymmetricKeyType, algorithm: AlgorithmType) {
         self.value = value
         self.type = type
+        self.algorithm = algorithm
     }
 
-    init(data: Data, type: AsymmetricKeyType, keySize: KeySize) throws {
+    public init(data: Data, type: AsymmetricKeyType, keySize: KeySize) throws {
         var keyData = data
         let keyType = type == .private ? kSecAttrKeyClassPrivate : kSecAttrKeyClassPublic
         var error: Unmanaged<CFError>?
@@ -52,6 +54,7 @@ public struct AsymmetricKey {
 
         self.value = secKey
         self.type = type
+        self.algorithm = RSAAlgorithm()
     }
 
     public func asData() throws -> Data {
