@@ -17,7 +17,7 @@ let package = Package(
     dependencies: [
         .package(name: "Data4LifeCryptoRSAPSS",
                  url: "https://github.com/d4l-data4life/d4l-crypto-rsa-pss-ios.git",
-                 .branch("feature/shrink-to-package-only"))
+                 .upToNextMinor(from: "1.0.0"))
 
     ],
     targets: [
