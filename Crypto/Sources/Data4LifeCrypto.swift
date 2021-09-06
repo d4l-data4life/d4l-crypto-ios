@@ -20,7 +20,9 @@ public protocol CryptorProtocol {
     static func symEncrypt(key: Key, data: Data, iv: Data) throws -> Data
     static func symDecrypt(key: Key, data: Data, iv: Data) throws -> Data
     static func asymEncrypt(key: KeyPair, data: Data) throws -> Data
+    static func asymEncrypt(publicKey: AsymmetricKey, data: Data) throws -> Data
     static func asymDecrypt(key: KeyPair, data: Data) throws -> Data
+    static func asymDecrypt(privateKey: AsymmetricKey, data: Data) throws -> Data
 }
 
 public protocol SignerProtocol {
