@@ -16,7 +16,7 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "Data4LifeCryptoRSAPSS",
-                 url: "https://d4l-ios-artifact-repository.s3.eu-central-1.amazonaws.com/d4l-data4life/d4l-crypto-ios/Data4LifeCrypto-xcframework-prepare-1.7.0.zip",
+                 url: "https://github.com/d4l-data4life/d4l-crypto-rsa-pss-ios.git",
                  .branch("feature/shrink-to-package-only"))
 
     ],
