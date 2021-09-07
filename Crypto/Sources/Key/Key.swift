@@ -24,7 +24,7 @@ public struct Key {
 
 extension Key {
     public init(data: Data, type: KeyType) throws {
-        let keyExchangeFormat = try KeyExhangeFactory.create(type: type)
+        let keyExchangeFormat = try KeyExchangeFactory.create(type: type)
         guard data.byteCount == keyExchangeFormat.size / 8 else {
             throw Data4LifeCryptoError.keyDoesNotMatchExpectedSize
         }
