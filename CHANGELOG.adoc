@@ -32,6 +32,8 @@ See link:{link-repository}/compare/v1.6.0...main[changeset]
 
 === Added
 
+* API to store KeyPair with a tag in keychain 
+
 === Changed
 
 === Removed

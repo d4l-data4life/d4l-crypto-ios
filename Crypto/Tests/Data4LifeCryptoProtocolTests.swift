@@ -1,4 +1,4 @@
-//  Copyright (c) 2020 D4L data4life gGmbH
+//  Copyright (c) 2021 D4L data4life gGmbH
 //  All rights reserved.
 //  
 //  D4L owns all legal rights, title and interest in and to the Software Development Kit ("SDK"),
@@ -86,7 +86,7 @@ class Data4LifeCryptoProtocolTests: XCTestCase {
 
     func testGenerateKey() {
         do {
-            let keyExchange = try! KeyExhangeFactory.create(type: .data)
+            let keyExchange = try! KeyExchangeFactory.create(type: .data)
             let options = KeyOptions(size: keyExchange.size)
             let key = try Data4LifeCryptor.generateSymKey(algorithm: keyExchange.algorithm, options: options, type: .data)
             XCTAssertEqual(key.algorithm.blockMode, BlockMode.gcm)
@@ -104,7 +104,7 @@ class Data4LifeCryptoProtocolTests: XCTestCase {
     #else
     func testGenerateKeyPair() {
         do {
-            let keyExchange = try! KeyExhangeFactory.create(type: .appPrivate)
+            let keyExchange = try! KeyExchangeFactory.create(type: .appPrivate)
             let options = KeyOptions(size: keyExchange.size, tag: UUID().uuidString)
             let keyPair = try Data4LifeCryptor.generateAsymKeyPair(algorithm: keyExchange.algorithm, options: options)
             XCTAssertEqual(keyPair.algorithm.blockMode, nil)
