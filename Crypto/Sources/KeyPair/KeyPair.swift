@@ -1,4 +1,4 @@
-//  Copyright (c) 2020 D4L data4life gGmbH
+//  Copyright (c) 2021 D4L data4life gGmbH
 //  All rights reserved.
 //  
 //  D4L owns all legal rights, title and interest in and to the Software Development Kit ("SDK"),
@@ -109,5 +109,33 @@ public struct KeyPair: KeyPairType {
                        publicKey: publicKey,
                        keySize: keySize,
                        algorithm: algorithm)
+    }
+
+    public func store(tag: String) throws {
+
+        let privateSecKeyData = try privateKey.asData()
+        let publicSecKeyData = try publicKey.asData()
+
+        let addPrivateKeyQuery = [kSecClass as String: kSecClassKey,
+                                  kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
+                                  kSecAttrKeyClass as String: kSecAttrKeyClassPrivate,
+                                  kSecValueData as String: privateSecKeyData,
+                                  kSecAttrApplicationTag as String: tag] as [String: Any]
+        let addPublicKeyQuery = [kSecClass as String: kSecClassKey,
+                                 kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
+                                 kSecAttrKeyClass as String: kSecAttrKeyClassPublic,
+                                 kSecValueData as String: publicSecKeyData,
+                                 kSecAttrApplicationTag as String: tag] as [String: Any]
+
+        var status = SecItemAdd(addPrivateKeyQuery as CFDictionary, nil)
+
+        guard status == errSecSuccess else {
+            throw Data4LifeCryptoError.couldNotStoreKeyPair(tag)
+        }
+
+        status = SecItemAdd(addPublicKeyQuery as CFDictionary, nil)
+        guard status == errSecSuccess else {
+            throw Data4LifeCryptoError.couldNotStoreKeyPair(tag)
+        }
     }
 }

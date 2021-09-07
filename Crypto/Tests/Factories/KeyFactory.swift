@@ -1,4 +1,4 @@
-//  Copyright (c) 2020 D4L data4life gGmbH
+//  Copyright (c) 2021 D4L data4life gGmbH
 //  All rights reserved.
 //  
 //  D4L owns all legal rights, title and interest in and to the Software Development Kit ("SDK"),
@@ -17,7 +17,7 @@ import Data4LifeCrypto
 
 struct KeyFactory {
     static func createKey(_ type: KeyType = .common) -> Key {
-        let exchangeFormat = try! KeyExhangeFactory.create(type: type)
+        let exchangeFormat = try! KeyExchangeFactory.create(type: type)
         return try! Key.generate(keySize: exchangeFormat.size, algorithm: exchangeFormat.algorithm, type: type)
     }
 
