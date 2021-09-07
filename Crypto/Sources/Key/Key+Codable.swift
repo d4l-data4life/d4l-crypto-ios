@@ -42,7 +42,7 @@ extension Key: Decodable {
             throw Data4LifeCryptoError.invalidKeyType(type)
         }
 
-        let keyExchangeFormat = try KeyExhangeFactory.create(type: keyType, version: version)
+        let keyExchangeFormat = try KeyExchangeFactory.create(type: keyType, version: version)
         self.algorithm = keyExchangeFormat.algorithm
         self.keySize = keyExchangeFormat.size
 

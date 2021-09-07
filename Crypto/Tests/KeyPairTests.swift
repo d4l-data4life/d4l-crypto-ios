@@ -17,6 +17,9 @@ import XCTest
 import Data4LifeCrypto
 
 class KeyPairTests: XCTestCase {
+
+    private let bundle = Foundation.Bundle.current
+
     #if SWIFT_PACKAGE
     #else
     func testGenerateLoadAndDestroyKeyPair() {
@@ -67,6 +70,29 @@ class KeyPairTests: XCTestCase {
         } catch {
             try! KeyPair.destroy(tag: tag)
         }
+    }
+
+    func testStoreKeyPairSuccessfully() throws {
+        let keyPair: KeyPair = try bundle.decodable(fromJSON: "asymDonationKey")
+        let tag = UUID().uuidString
+        let algo = RSAAlgorithm()
+        try keyPair.store(tag: tag)
+        let fetchedKeyPair = try KeyPair.load(tag: tag, algorithm: algo)
+        XCTAssertEqual(try keyPair.publicKey.asBase64EncodedString(),
+                       try fetchedKeyPair.publicKey.asBase64EncodedString())
+        XCTAssertEqual(try keyPair.privateKey.asBase64EncodedString(),
+                       try fetchedKeyPair.privateKey.asBase64EncodedString())
+        try KeyPair.destroy(tag: tag)
+    }
+
+    func testStoreKeyPairFail() throws {
+        let keyPair: KeyPair = try bundle.decodable(fromJSON: "asymDonationKey")
+        let tag = UUID().uuidString
+        try keyPair.store(tag: tag)
+        XCTAssertThrowsError(try keyPair.store(tag: tag), "should fail because it already exists") { error in
+            XCTAssertEqual(error as? Data4LifeCryptoError, Data4LifeCryptoError.couldNotStoreKeyPair(tag))
+        }
+        try KeyPair.destroy(tag: tag)
     }
     #endif
 }

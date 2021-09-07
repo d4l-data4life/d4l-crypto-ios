@@ -23,6 +23,7 @@ public enum Data4LifeCryptoError: LocalizedError {
     case couldNotReadBase64EncodedData
     case couldNotReadKeyPair(String)
     case couldNotDeleteKeyPair(String)
+    case couldNotStoreKeyPair(String)
     case couldNotCopySecureRandomBytes
     case couldNotEncryptData
     case couldNotDecryptData
@@ -53,6 +54,8 @@ extension Data4LifeCryptoError: CustomStringConvertible {
             return "Could not read key pair with tag: \(tag)"
         case .couldNotDeleteKeyPair(let tag):
             return "Could not delete key pair with tag: \(tag)"
+        case .couldNotStoreKeyPair(let tag):
+            return "Could not store key pair with tag: \(tag)"
         case .couldNotCopySecureRandomBytes:
             return "Could not copy secure random bytes"
         case .keyDoesNotMatchExpectedSize:
