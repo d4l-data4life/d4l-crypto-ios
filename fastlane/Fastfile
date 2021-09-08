@@ -323,7 +323,7 @@ platform :ios do
       url = "https://d4l-ios-artifact-repository.s3.eu-central-1.amazonaws.com/#{s3_key(repository, path)}"
 
       packageSwiftData = File.read("Package.swift")
-      updatedPackageSwiftData = packageSwiftData.gsub(/url: \"[a-zA-Z0-9:\-\/_.,\\()]+\"/, "url: \"#{url}\"")
+      updatedPackageSwiftData = packageSwiftData.gsub(/url: \"[a-zA-Z0-9:\-\/_.,\\()]+xcframework[a-zA-Z0-9:\-\/_.,\\()]+\"/, "url: \"#{url}\"")
       updatedPackageSwiftData = updatedPackageSwiftData.gsub(/checksum: \"[a-zA-Z0-9]+\"/, "checksum: \"#{checksum}\"")
       puts updatedPackageSwiftData
 
