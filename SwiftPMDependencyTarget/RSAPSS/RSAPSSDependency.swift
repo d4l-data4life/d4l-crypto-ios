@@ -12,15 +12,5 @@
 //  If you are interested in licensing the SDK for your own applications/third-party
 //  applications and/or if you’d like to contribute to the development of the SDK, please
 //  contact D4L by email to help@data4life.care.
-//
 
-import SwiftUI
-
-@main
-struct Data4LifeCryptoHostAppApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
-}
+import Foundation

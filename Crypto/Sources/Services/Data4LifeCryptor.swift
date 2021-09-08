@@ -17,15 +17,6 @@ import Foundation
 import CryptoKit
 import CommonCrypto
 
-public protocol CryptorProtocol {
-    static func symEncrypt(key: Key, data: Data, iv: Data) throws -> Data
-    static func symDecrypt(key: Key, data: Data, iv: Data) throws -> Data
-    static func asymEncrypt(key: KeyPair, data: Data) throws -> Data
-    static func asymDecrypt(key: KeyPair, data: Data) throws -> Data
-    static func generateAsymKeyPair(algorithm: AlgorithmType, options: KeyOptions) throws -> KeyPair
-    static func generateSymKey(algorithm: AlgorithmType, options: KeyOptions, type: KeyType) throws -> Key
-}
-
 public struct Data4LifeCryptor: CryptorProtocol {
     public static func symEncrypt(key: Key, data: Data, iv: Data) throws -> Data {
         return try symmetricEncrypt(key: key.value, data: data, algorithm: key.algorithm, iv: iv)
@@ -41,17 +32,6 @@ public struct Data4LifeCryptor: CryptorProtocol {
 
     public static func asymDecrypt(key: KeyPair, data: Data) throws -> Data {
         return try cipher(key: key.privateKey.value, algorithm: key.algorithm).decrypt(data)
-    }
-
-    public static func generateAsymKeyPair(algorithm: AlgorithmType, options: KeyOptions) throws -> KeyPair {
-        guard let tag = options.tag else {
-            throw Data4LifeCryptoError.missingKeyPairTagOption
-        }
-        return try KeyPair.generate(tag: tag, keySize: options.size, algorithm: algorithm)
-    }
-
-    public static func generateSymKey(algorithm: AlgorithmType, options: KeyOptions, type: KeyType) throws -> Key {
-        return try Key.generate(keySize: options.size, algorithm: algorithm, type: type)
     }
 }
 

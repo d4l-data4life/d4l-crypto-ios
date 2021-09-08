@@ -28,11 +28,9 @@ toc::[]
 
 == link:{link-repository}/releases/latest[Unreleased]
 
-See link:{link-repository}/compare/v1.6.0...main[changeset]
+See link:{link-repository}/compare/v1.7.0...main[changeset]
 
 === Added
-
-* API to store KeyPair with a tag in keychain 
 
 === Changed
 
@@ -47,6 +45,18 @@ See link:{link-repository}/compare/v1.6.0...main[changeset]
 === Deprecated
 
 === Migration
+
+== link:{link-repository}/releases/tag/v1.7.0[1.7.0]
+
+=== Added
+
+* Possibility to store KeyPair with a tag in keychain 
+* Publicly exposed AESAlgorithm with 2 factory methods
+* Added methods for sign and verify with RSA PSS, using SHA256 salted (32) or unsalted (0)
+
+=== Fixed
+
+* It is now possible to use AES GCM with any IV size up from 12 Bytes
 
 == link:{link-repository}/releases/tag/v1.6.0[1.6.0]
 

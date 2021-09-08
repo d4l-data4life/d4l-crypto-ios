@@ -2,39 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "Alamofire",
-        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
+        "package": "Data4LifeCryptoRSAPSS",
+        "repositoryURL": "https://github.com/d4l-data4life/d4l-crypto-rsa-pss-ios",
         "state": {
           "branch": null,
-          "revision": "eaf6e622dd41b07b251d8f01752eab31bc811493",
-          "version": "5.4.1"
-        }
-      },
-      {
-        "package": "AppAuth",
-        "repositoryURL": "https://github.com/openid/AppAuth-iOS.git",
-        "state": {
-          "branch": null,
-          "revision": "01131d68346c8ae552961c768d583c715fbe1410",
-          "version": "1.4.0"
-        }
-      },
-      {
-        "package": "Data4LifeFHIR",
-        "repositoryURL": "https://github.com/d4l-data4life/d4l-fhir-ios.git",
-        "state": {
-          "branch": null,
-          "revision": "2120c7cf148161691f63d285bd76bfd165067796",
-          "version": "0.21.1"
-        }
-      },
-      {
-        "package": "Data4LifeSDKUtils",
-        "repositoryURL": "https://github.com/d4l-data4life/d4l-utils-ios.git",
-        "state": {
-          "branch": null,
-          "revision": "4cc48b98b1112ce680b91ee81bb4c38559b3116f",
-          "version": "0.6.0"
+          "revision": "df6623aaf461f18b03cb1e3884792ecd7b32efdb",
+          "version": "1.0.0"
         }
       }
     ]
