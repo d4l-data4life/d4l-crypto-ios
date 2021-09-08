@@ -63,7 +63,7 @@ class Data4LifeCryptoProtocolTests: XCTestCase {
     func testEncryptTags() {
         do {
             let testModel: SymCryptoTestModel = try bundle.decodable(fromJSON: "symTagEncrypt")
-            let blankIV = [UInt8](repeating: 0x00, count: testModel.key.ivSize).asData
+            let blankIV = [UInt8](repeating: 0x00, count: testModel.key.defaultIvSize).asData
             let ciphertext = try Data4LifeCryptor.symEncrypt(key: testModel.key,
                                                             data: testModel.inputString.data(using: .utf8)!,
                                                             iv: blankIV)
@@ -76,7 +76,7 @@ class Data4LifeCryptoProtocolTests: XCTestCase {
     func testDecryptTags() {
         do {
             let testModel: SymCryptoTestModel = try bundle.decodable(fromJSON: "symTagDecrypt")
-            let blankIV = [UInt8](repeating: 0x00, count: testModel.key.ivSize).asData
+            let blankIV = [UInt8](repeating: 0x00, count: testModel.key.defaultIvSize).asData
             let plaintext = try Data4LifeCryptor.symDecrypt(key: testModel.key, data: testModel.inputData, iv: blankIV)
             XCTAssertEqual(testModel.outputString, String(data: plaintext, encoding: .utf8)!)
         } catch {

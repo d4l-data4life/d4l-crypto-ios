@@ -15,16 +15,26 @@
 
 import Foundation
 
-struct AESAlgorithm: AlgorithmType {
-    var cipher: CipherType
-    var padding: Padding
-    var blockMode: BlockMode?
-    var hash: HashType?
+public struct AESAlgorithm: AlgorithmType, Equatable {
+    public let cipher: CipherType
+    public let padding: Padding
+    public let blockMode: BlockMode?
+    public let hash: HashType?
 
     init(cipher: CipherType, padding: Padding, blockMode: BlockMode, hash: HashType?) {
         self.cipher = cipher
         self.padding = padding
         self.blockMode = blockMode
         self.hash = hash
+    }
+}
+
+public extension AESAlgorithm {
+    static func noPaddingGCM(hash: HashType? = nil) -> AESAlgorithm {
+        AESAlgorithm(cipher: .aes, padding: .noPadding, blockMode: .gcm, hash: hash)
+    }
+
+    static func pkcs7CBC(hash: HashType? = nil) -> AESAlgorithm {
+        AESAlgorithm(cipher: .aes, padding: .pkcs7, blockMode: .cbc, hash: hash)
     }
 }

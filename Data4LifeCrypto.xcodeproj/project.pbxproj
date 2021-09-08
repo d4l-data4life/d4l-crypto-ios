@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		36238DB2252F3CE200923F22 /* InitializationVectorGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36238DB1252F3CE200923F22 /* InitializationVectorGenerator.swift */; };
+		3661D4C826DF7C8100BC51F3 /* KeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3661D4C726DF7C8100BC51F3 /* KeyTests.swift */; };
 		36FA37D626D6667B00DDCC35 /* Data4LifeCryptoHostAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FA37D526D6667B00DDCC35 /* Data4LifeCryptoHostAppApp.swift */; };
 		36FA37D826D6667B00DDCC35 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FA37D726D6667B00DDCC35 /* ContentView.swift */; };
 		36FA37DA26D6667C00DDCC35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36FA37D926D6667C00DDCC35 /* Assets.xcassets */; };
@@ -71,6 +72,7 @@
 
 /* Begin PBXFileReference section */
 		36238DB1252F3CE200923F22 /* InitializationVectorGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializationVectorGenerator.swift; sourceTree = "<group>"; };
+		3661D4C726DF7C8100BC51F3 /* KeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyTests.swift; sourceTree = "<group>"; };
 		36FA37D326D6667B00DDCC35 /* Data4LifeCryptoHostApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Data4LifeCryptoHostApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36FA37D526D6667B00DDCC35 /* Data4LifeCryptoHostAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data4LifeCryptoHostAppApp.swift; sourceTree = "<group>"; };
 		36FA37D726D6667B00DDCC35 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				CD10919F225B8A0A00325389 /* Data4LifeCryptoProtocolTests.swift */,
 				CD109199225B8A0A00325389 /* CryptoModelTests.swift */,
 				CD524A922260DB5C0007DB8F /* KeyPairTests.swift */,
+				3661D4C726DF7C8100BC51F3 /* KeyTests.swift */,
 				CD109197225B8A0A00325389 /* Models */,
 				CD10919C225B8A0A00325389 /* Factories */,
 				CD10919A225B8A0A00325389 /* Extensions */,
@@ -557,6 +560,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3661D4C826DF7C8100BC51F3 /* KeyTests.swift in Sources */,
 				CD1091B1225B8A0A00325389 /* KeyFactory.swift in Sources */,
 				CD1091B0225B8A0A00325389 /* Bundle+JSON.swift in Sources */,
 				CD1091AF225B8A0A00325389 /* CryptoModelTests.swift in Sources */,

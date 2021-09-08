@@ -20,7 +20,22 @@ public struct Key {
     public var algorithm: AlgorithmType
     public let keySize: KeySize
     public let type: KeyType
+}
 
+extension Key {
+    public init(data: Data, type: KeyType) throws {
+        let keyExchangeFormat = try KeyExchangeFactory.create(type: type)
+        guard data.byteCount == keyExchangeFormat.size / 8 else {
+            throw Data4LifeCryptoError.keyDoesNotMatchExpectedSize
+        }
+        self = Key(value: data,
+                   algorithm: keyExchangeFormat.algorithm,
+                   keySize: keyExchangeFormat.size,
+                   type: type)
+    }
+}
+
+extension Key {
     public static func generate(keySize: KeySize, algorithm: AlgorithmType, type: KeyType) throws -> Key {
         let byteCount = keySize / 8
         var randomBytes: [UInt8] = Array(repeating: 0, count: byteCount)
@@ -40,7 +55,7 @@ extension Key: Equatable {
 }
 
 extension Key {
-    public var ivSize: Int {
+    public var defaultIvSize: Int {
         switch algorithm.blockMode {
         case .cbc?:
             return 16

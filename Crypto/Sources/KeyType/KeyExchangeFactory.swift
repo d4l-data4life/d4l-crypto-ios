@@ -25,11 +25,9 @@ public struct KeyExchangeFactory {
 
         switch type {
         case .common, .data, .attachment:
-            let algo = AESAlgorithm(cipher: .aes, padding: .noPadding, blockMode: .gcm, hash: nil)
-            return (algo, 256)
+            return (AESAlgorithm.noPaddingGCM(), 256)
         case .tag:
-            let algo = AESAlgorithm(cipher: .aes, padding: .pkcs7, blockMode: .cbc, hash: nil)
-            return (algo, 256)
+            return (AESAlgorithm.pkcs7CBC(), 256)
         case .appPrivate, .appPublic, .dataDonation:
             return (RSAAlgorithm(), 2048)
         }
