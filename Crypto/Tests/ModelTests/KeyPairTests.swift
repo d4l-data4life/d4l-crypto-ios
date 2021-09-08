@@ -111,26 +111,38 @@ extension KeyPairTests {
     }
 
     func testStoreKeyPairSuccessfully() throws {
+
+        // Given
         let keyPair: KeyPair = try bundle.decodable(fromJSON: "asymDonationKey")
         let tag = UUID().uuidString
         let algo = RSAAlgorithm()
+
+        // When
         try keyPair.store(tag: tag)
         let fetchedKeyPair = try KeyPair.load(tag: tag, algorithm: algo)
+
+        // Then
         XCTAssertEqual(try keyPair.publicKey.asBase64EncodedString(),
                        try fetchedKeyPair.publicKey.asBase64EncodedString())
         XCTAssertEqual(try keyPair.privateKey.asBase64EncodedString(),
                        try fetchedKeyPair.privateKey.asBase64EncodedString())
-        try KeyPair.destroy(tag: tag)
+        XCTAssertNoThrow(try KeyPair.destroy(tag: tag))
     }
 
     func testStoreKeyPairFail() throws {
+
+        // Given
         let keyPair: KeyPair = try bundle.decodable(fromJSON: "asymDonationKey")
         let tag = UUID().uuidString
+
+        // When
         try keyPair.store(tag: tag)
+
+        // Then
         XCTAssertThrowsError(try keyPair.store(tag: tag), "should fail because it already exists") { error in
             XCTAssertEqual(error as? Data4LifeCryptoError, Data4LifeCryptoError.couldNotStoreKeyPair(tag))
         }
-        try KeyPair.destroy(tag: tag)
+        XCTAssertNoThrow(try KeyPair.destroy(tag: tag))
     }
 }
 #endif
