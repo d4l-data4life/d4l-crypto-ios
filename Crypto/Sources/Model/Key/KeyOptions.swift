@@ -20,9 +20,11 @@ public typealias KeySize = Int
 public struct KeyOptions {
     public let size: KeySize
     public let tag: String?
+    public let isPermanent: Bool
 
-    public init(size: KeySize, tag: String? = nil) {
+    public init(size: KeySize, tag: String? = nil, isPermanent: Bool = true) {
         self.size = size
         self.tag = tag
+        self.isPermanent = isPermanent
     }
 }
