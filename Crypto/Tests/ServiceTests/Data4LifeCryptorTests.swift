@@ -40,6 +40,38 @@ class Data4LifeCryptoProtocolTests: XCTestCase {
         }
     }
 
+    func testAsymmetricDecryptWithAsymmetricKey() {
+        do {
+            let testModel: AsymCryptoTestModel = try bundle.decodable(fromJSON: "asymDecrypt")
+            let decryptedData = try Data4LifeCryptor.asymDecrypt(privateKey: testModel.keypair.privateKey, data: testModel.inputData)
+            XCTAssertEqual(testModel.outputData, decryptedData)
+        } catch {
+            XCTFail(error.localizedDescription)
+        }
+    }
+
+    func testAsymmetricEncryptWithAsymmetricKeyDecryptWithKeyPair() {
+        do {
+            let testModel: AsymCryptoTestModel = try bundle.decodable(fromJSON: "asymEncrypt")
+            let encryptedData = try Data4LifeCryptor.asymEncrypt(publicKey: testModel.keypair.publicKey, data: testModel.inputData)
+            let decryptedData = try Data4LifeCryptor.asymDecrypt(key: testModel.keypair, data: encryptedData)
+            XCTAssertEqual(testModel.inputData, decryptedData)
+        } catch {
+            XCTFail(error.localizedDescription)
+        }
+    }
+
+    func testAsymmetricEncryptWithAsymmetricKeyDecryptWithKey() {
+        do {
+            let testModel: AsymCryptoTestModel = try bundle.decodable(fromJSON: "asymEncrypt")
+            let encryptedData = try Data4LifeCryptor.asymEncrypt(publicKey: testModel.keypair.publicKey, data: testModel.inputData)
+            let decryptedData = try Data4LifeCryptor.asymDecrypt(privateKey: testModel.keypair.privateKey, data: encryptedData)
+            XCTAssertEqual(testModel.inputData, decryptedData)
+        } catch {
+            XCTFail(error.localizedDescription)
+        }
+    }
+
     func testSymmetricEncrypt() {
         do {
             let testModel: SymCryptoTestModel = try bundle.decodable(fromJSON: "symCommonEncrypt")
