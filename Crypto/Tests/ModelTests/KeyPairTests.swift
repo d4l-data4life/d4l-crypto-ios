@@ -80,7 +80,7 @@ extension KeyPairTests {
         let algo = RSAAlgorithm()
 
         // When
-        let _ = try KeyPair.generate(tag: tag, keySize: size, algorithm: algo, isPermanent: true)
+        _ = try KeyPair.generate(tag: tag, keySize: size, algorithm: algo, isPermanent: true)
         let loadedKeyPair = try KeyPair.load(tag: tag, algorithm: algo)
 
         // Then
@@ -109,7 +109,7 @@ extension KeyPairTests {
         XCTAssertEqual(keyPair.algorithm.padding.rawValue, loadedKeyPair.algorithm.padding.rawValue)
         XCTAssertEqual(keyPair.algorithm.hash?.rawValue, loadedKeyPair.algorithm.hash?.rawValue)
     }
-    
+
     func testStoreKeyPairSuccessfully() throws {
         let keyPair: KeyPair = try bundle.decodable(fromJSON: "asymDonationKey")
         let tag = UUID().uuidString
