@@ -163,7 +163,7 @@ let key = Key.generate(...)
 let keyData = try JSONEncoder().encode(key)
 ----
 
-Example of creating a key and ecrypting data
+Example of creating a key and encrypting data
 
 [source, swift]
 ----
@@ -203,13 +203,31 @@ Helper methods for working with keypairs (wrapper around `Security` framework)
 
 [source, swift]
 ----
-static func generate(tag: String, keySize: Int, algorithm: AlgorithmType) throws -> KeyPair
+static func generate(tag: String, keySize: Int, algorithm: AlgorithmType, isPermanent: Bool = true) throws -> KeyPair
 static func load(tag: String, algorithm: AlgorithmType) throws -> KeyPair
 static func destroy(tag: String) throws
 func store(tag: String) throws
 ----
 
-Exporting public key can be done in one of two formats `PKCS#1` or `SPKI` or as `Data`
+=== AsymetricKey (asymmetric)
+
+[source, swift]
+----
+public AsymmetricKey {
+    let value: SecKey
+    let type: AsymmetricKeyType
+    let algorithm: AlgorithmType
+
+    init(data: Data, type: AsymmetricKeyType, keySize: KeySize) throws 
+}
+
+enum AsymmetricKeyType: String {
+    case `public`
+    case `private`
+}
+----
+
+Exporting asymmetric keys can be done in one of two formats `PKCS#1` or `SPKI` or as `Data`
 
 [source, swift]
 ----
@@ -234,6 +252,19 @@ let plaintext: Data = Data(bytes: [0x00, 0x01, 0x02])
 let ciphertext: Data = try Data4LifeCryptor.asymEncrypt(key: keypair, data: plaintext)
 ----
 
+Example of creating keypair and encrypting data only using an asymmetric key
+
+[source, swift]
+----
+let tag: String = "com.example.keypair"
+let keyType: KeyType = .appPrivate
+let keyExchangeFormat = try KeyExchangeFactory.create(type: type)
+let keypair = try KeyPair.generate(tag: tag, keySize: keyExchangeFormat.size, algorithm: keyExchangeFormat.algorithm)
+
+let plaintext: Data = Data(bytes: [0x00, 0x01, 0x02])
+let ciphertext: Data = try Data4LifeCryptor.asymEncrypt(publicKey: keypair.publicKey, data: plaintext)
+----
+
 Decrypt the data
 
 [source, swift]
@@ -245,6 +276,19 @@ let keypair = try KeyPair.load(tag: tag, algorithm: keyExchangeFormat.algorithm)
 
 let ciphertext: Data = ... // fetch ciphertext from storage
 let plaintext: Data = try Data4LifeCryptor.asymDecrypt(key: keypair, data: ciphertext)
+----
+
+Decrypt the data only using an asymmetric key
+
+[source, swift]
+----
+let tag: String = "com.example.keypair"
+let keyType: KeyType = .appPrivate
+let keyExchangeFormat = KeyExchangeFactory.create(type: type)
+let keypair = try KeyPair.load(tag: tag, algorithm: keyExchangeFormat.algorithm)
+
+let ciphertext: Data = ... // fetch ciphertext from storage
+let plaintext: Data = try Data4LifeCryptor.asymDecrypt(privateKey: keypair.privateKey, data: ciphertext)
 ----
 
 == Changelog
