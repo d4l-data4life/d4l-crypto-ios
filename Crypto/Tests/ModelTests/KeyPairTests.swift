@@ -20,30 +20,50 @@ class KeyPairTests: XCTestCase {
 
     private let bundle = Foundation.Bundle.current
 
-    func testGenerateKeyPairAndExportPubKeyAsSPKI() {
+    func testGenerateKeyPairAndExportPubKeyAsSPKI() throws {
+
+        // Given
         let tag = UUID().uuidString
         let size = 2048
         let algo = RSAAlgorithm()
 
-        do {
-            let keyPair = try KeyPair.generate(tag: tag, keySize: size, algorithm: algo, isPermanent: false)
-            _ = try keyPair.publicKey.asSPKIBase64EncodedString()
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
+        // When
+        let keyPair = try KeyPair.generate(tag: tag, keySize: size, algorithm: algo, isPermanent: false)
+        let key = try keyPair.publicKey.asSPKIBase64EncodedString()
+
+        // Then
+        XCTAssertNotNil(key)
     }
 
-    func testGenerateKeyPairAndFailExportingAsSPKI() {
+    func testGenerateKeyPairAndFailExportingAsSPKI() throws {
+
+        // Given
         let tag = UUID().uuidString
         let size = 1024 // there is no SPKI header for 1024 key, but it's possible to create keypair
         let algo = RSAAlgorithm()
 
-        do {
-            let keyPair = try KeyPair.generate(tag: tag, keySize: size, algorithm: algo, isPermanent: false)
-            _ = try keyPair.publicKey.asSPKIBase64EncodedString()
-            XCTFail("Should not generate SPKI public key")
-        } catch {
+        // When
+        let keyPair = try KeyPair.generate(tag: tag, keySize: size, algorithm: algo, isPermanent: false)
+
+        // Then
+        XCTAssertThrowsError(try keyPair.publicKey.asSPKIBase64EncodedString(), "should throw error") { error in
             XCTAssertEqual(error as? Data4LifeCryptoError, .missingHeaderBytesForKeySize(1024))
+        }
+    }
+
+    func testGenerateKeyPairWithPermanentFalse() throws {
+
+        // Given
+        let tag = UUID().uuidString
+        let size = 2048
+        let algo = RSAAlgorithm()
+
+        // When
+        _ = try KeyPair.generate(tag: tag, keySize: size, algorithm: algo, isPermanent: false)
+
+        // Then
+        XCTAssertThrowsError(try KeyPair.load(tag: tag, algorithm: algo), "should throw error") { error in
+            XCTAssertEqual(error as? Data4LifeCryptoError, .couldNotReadKeyPair(tag))
         }
     }
 }
@@ -52,47 +72,77 @@ class KeyPairTests: XCTestCase {
 #else
 extension KeyPairTests {
 
-    func testGenerateLoadAndDestroyKeyPair() {
-        do {
-            let tag = UUID().uuidString
-            let size = 2048
-            let algo = RSAAlgorithm()
+    func testGenerateKeyPairWithPermanentTrue() throws {
 
-            let generatedKeyPair = try KeyPair.generate(tag: tag, keySize: size, algorithm: algo)
-            let loadedKeyPair = try KeyPair.load(tag: tag, algorithm: algo)
+        // Given
+        let tag = UUID().uuidString
+        let size = 2048
+        let algo = RSAAlgorithm()
 
-            let privateBase64String = try generatedKeyPair.privateKey.asBase64EncodedString()
-            XCTAssertEqual(privateBase64String, try loadedKeyPair.privateKey.asBase64EncodedString())
-            XCTAssertEqual(generatedKeyPair.algorithm.blockMode?.rawValue, loadedKeyPair.algorithm.blockMode?.rawValue)
-            XCTAssertEqual(generatedKeyPair.algorithm.cipher.rawValue, loadedKeyPair.algorithm.cipher.rawValue)
-            XCTAssertEqual(generatedKeyPair.algorithm.padding.rawValue, loadedKeyPair.algorithm.padding.rawValue)
-            XCTAssertEqual(generatedKeyPair.algorithm.hash?.rawValue, loadedKeyPair.algorithm.hash?.rawValue)
-        } catch(let error) {
-            XCTFail(error.localizedDescription)
-        }
+        // When
+        _ = try KeyPair.generate(tag: tag, keySize: size, algorithm: algo, isPermanent: true)
+        let loadedKeyPair = try KeyPair.load(tag: tag, algorithm: algo)
+
+        // Then
+        XCTAssertNotNil(loadedKeyPair)
+        XCTAssertNoThrow(try KeyPair.destroy(tag: tag))
+    }
+
+    func testGeneratedKeyPairAndStoredWithPermanentAreTheSame() throws {
+
+        // Given
+        let tag = UUID().uuidString
+        let size = 2048
+        let algo = RSAAlgorithm()
+
+        // When
+        let keyPair = try KeyPair.generate(tag: tag, keySize: size, algorithm: algo, isPermanent: true)
+        let loadedKeyPair = try KeyPair.load(tag: tag, algorithm: algo)
+
+        // Then
+        XCTAssertEqual(try keyPair.privateKey.asBase64EncodedString(),
+                       try loadedKeyPair.privateKey.asBase64EncodedString())
+        XCTAssertEqual(try keyPair.publicKey.asBase64EncodedString(),
+                       try loadedKeyPair.publicKey.asBase64EncodedString())
+        XCTAssertEqual(keyPair.algorithm.blockMode?.rawValue, loadedKeyPair.algorithm.blockMode?.rawValue)
+        XCTAssertEqual(keyPair.algorithm.cipher.rawValue, loadedKeyPair.algorithm.cipher.rawValue)
+        XCTAssertEqual(keyPair.algorithm.padding.rawValue, loadedKeyPair.algorithm.padding.rawValue)
+        XCTAssertEqual(keyPair.algorithm.hash?.rawValue, loadedKeyPair.algorithm.hash?.rawValue)
     }
 
     func testStoreKeyPairSuccessfully() throws {
+
+        // Given
         let keyPair: KeyPair = try bundle.decodable(fromJSON: "asymDonationKey")
         let tag = UUID().uuidString
         let algo = RSAAlgorithm()
+
+        // When
         try keyPair.store(tag: tag)
         let fetchedKeyPair = try KeyPair.load(tag: tag, algorithm: algo)
+
+        // Then
         XCTAssertEqual(try keyPair.publicKey.asBase64EncodedString(),
                        try fetchedKeyPair.publicKey.asBase64EncodedString())
         XCTAssertEqual(try keyPair.privateKey.asBase64EncodedString(),
                        try fetchedKeyPair.privateKey.asBase64EncodedString())
-        try KeyPair.destroy(tag: tag)
+        XCTAssertNoThrow(try KeyPair.destroy(tag: tag))
     }
 
     func testStoreKeyPairFail() throws {
+
+        // Given
         let keyPair: KeyPair = try bundle.decodable(fromJSON: "asymDonationKey")
         let tag = UUID().uuidString
+
+        // When
         try keyPair.store(tag: tag)
+
+        // Then
         XCTAssertThrowsError(try keyPair.store(tag: tag), "should fail because it already exists") { error in
             XCTAssertEqual(error as? Data4LifeCryptoError, Data4LifeCryptoError.couldNotStoreKeyPair(tag))
         }
-        try KeyPair.destroy(tag: tag)
+        XCTAssertNoThrow(try KeyPair.destroy(tag: tag))
     }
 }
 #endif
