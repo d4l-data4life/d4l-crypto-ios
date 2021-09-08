@@ -35,8 +35,8 @@ public struct KeyPair: KeyPairType {
     public let algorithm: AlgorithmType
 
     init(privateKey: SecKey, publicKey: SecKey, keySize: KeySize, algorithm: AlgorithmType) {
-        self.privateKey = AsymmetricKey(value: privateKey, type: .private)
-        self.publicKey = AsymmetricKey(value: publicKey, type: .public)
+        self.privateKey = AsymmetricKey(value: privateKey, type: .private, algorithm: algorithm)
+        self.publicKey = AsymmetricKey(value: publicKey, type: .public, algorithm: algorithm)
         self.keySize = keySize
         self.algorithm = algorithm
     }

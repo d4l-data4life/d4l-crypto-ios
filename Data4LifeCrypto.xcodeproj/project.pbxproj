@@ -18,6 +18,7 @@
 		3661D4F826E1124700BC51F3 /* asymDonationServiceKey.json in Resources */ = {isa = PBXBuildFile; fileRef = 3661D4F726E1124700BC51F3 /* asymDonationServiceKey.json */; };
 		3661D4FD26E1226800BC51F3 /* ExampleSignature0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3661D4FC26E1226800BC51F3 /* ExampleSignature0.txt */; };
 		367B639326E238A70020C4B5 /* Data4LifeCryptoRSAPSS in Frameworks */ = {isa = PBXBuildFile; productRef = 367B639226E238A70020C4B5 /* Data4LifeCryptoRSAPSS */; };
+		36EA67DE26E900CE00A283DB /* AsymmetricKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EA67DD26E900CE00A283DB /* AsymmetricKeyTests.swift */; };
 		36FA37D626D6667B00DDCC35 /* Data4LifeCryptoHostAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FA37D526D6667B00DDCC35 /* Data4LifeCryptoHostAppApp.swift */; };
 		36FA37D826D6667B00DDCC35 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FA37D726D6667B00DDCC35 /* ContentView.swift */; };
 		36FA37DA26D6667C00DDCC35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36FA37D926D6667C00DDCC35 /* Assets.xcassets */; };
@@ -90,6 +91,7 @@
 		3661D4F526E1118100BC51F3 /* ExampleSignature32.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ExampleSignature32.txt; sourceTree = "<group>"; };
 		3661D4F726E1124700BC51F3 /* asymDonationServiceKey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = asymDonationServiceKey.json; sourceTree = "<group>"; };
 		3661D4FC26E1226800BC51F3 /* ExampleSignature0.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ExampleSignature0.txt; sourceTree = "<group>"; };
+		36EA67DD26E900CE00A283DB /* AsymmetricKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsymmetricKeyTests.swift; sourceTree = "<group>"; };
 		36FA37D326D6667B00DDCC35 /* Data4LifeCryptoHostApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Data4LifeCryptoHostApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36FA37D526D6667B00DDCC35 /* Data4LifeCryptoHostAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data4LifeCryptoHostAppApp.swift; sourceTree = "<group>"; };
 		36FA37D726D6667B00DDCC35 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 			children = (
 				CD524A922260DB5C0007DB8F /* KeyPairTests.swift */,
 				3661D4C726DF7C8100BC51F3 /* KeyTests.swift */,
+				36EA67DD26E900CE00A283DB /* AsymmetricKeyTests.swift */,
 			);
 			path = ModelTests;
 			sourceTree = "<group>";
@@ -643,6 +646,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3661D4F126E10F6100BC51F3 /* Data4LifeKeyGeneratorTests.swift in Sources */,
+				36EA67DE26E900CE00A283DB /* AsymmetricKeyTests.swift in Sources */,
 				3661D4C826DF7C8100BC51F3 /* KeyTests.swift in Sources */,
 				CD1091B1225B8A0A00325389 /* KeyFactory.swift in Sources */,
 				CD1091B0225B8A0A00325389 /* Bundle+JSON.swift in Sources */,

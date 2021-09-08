@@ -59,6 +59,6 @@ extension KeyPair: Decodable {
             throw Data4LifeCryptoError.couldNotReadPublicKey
         }
 
-        self.publicKey = AsymmetricKey(value: publicKey, type: .public)
+        self.publicKey = AsymmetricKey(value: publicKey, type: .public, algorithm: algorithm)
     }
 }

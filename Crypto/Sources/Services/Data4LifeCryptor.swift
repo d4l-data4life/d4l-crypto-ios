@@ -18,6 +18,7 @@ import CryptoKit
 import CommonCrypto
 
 public struct Data4LifeCryptor: CryptorProtocol {
+
     public static func symEncrypt(key: Key, data: Data, iv: Data) throws -> Data {
         return try symmetricEncrypt(key: key.value, data: data, algorithm: key.algorithm, iv: iv)
     }
@@ -32,6 +33,14 @@ public struct Data4LifeCryptor: CryptorProtocol {
 
     public static func asymDecrypt(key: KeyPair, data: Data) throws -> Data {
         return try cipher(key: key.privateKey.value, algorithm: key.algorithm).decrypt(data)
+    }
+
+    public static func asymEncrypt(publicKey: AsymmetricKey, data: Data) throws -> Data {
+        return try cipher(key: publicKey.value, algorithm: publicKey.algorithm).encrypt(data)
+    }
+
+    public static func asymDecrypt(privateKey: AsymmetricKey, data: Data) throws -> Data {
+        return try cipher(key: privateKey.value, algorithm: privateKey.algorithm).decrypt(data)
     }
 }
 
