@@ -46,6 +46,12 @@ See link:{link-repository}/compare/v1.7.0...main[changeset]
 
 === Migration
 
+== link:{link-repository}/releases/tag/v1.8.0[1.8.0]
+
+=== Bumped 
+
+* Compiled for Xcode 13.1
+
 == link:{link-repository}/releases/tag/v1.7.0[1.7.0]
 
 === Added
