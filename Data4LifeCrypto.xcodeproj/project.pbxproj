@@ -91,6 +91,8 @@
 		3661D4F526E1118100BC51F3 /* ExampleSignature32.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ExampleSignature32.txt; sourceTree = "<group>"; };
 		3661D4F726E1124700BC51F3 /* asymDonationServiceKey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = asymDonationServiceKey.json; sourceTree = "<group>"; };
 		3661D4FC26E1226800BC51F3 /* ExampleSignature0.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ExampleSignature0.txt; sourceTree = "<group>"; };
+		369E89AE270360340082309A /* Data4LifeCryptoHostApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Data4LifeCryptoHostApp.entitlements; sourceTree = "<group>"; };
+		369E89AF270361DA0082309A /* Data4LifeCryptoHostAppDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Data4LifeCryptoHostAppDebug.entitlements; sourceTree = "<group>"; };
 		36EA67DD26E900CE00A283DB /* AsymmetricKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsymmetricKeyTests.swift; sourceTree = "<group>"; };
 		36FA37D326D6667B00DDCC35 /* Data4LifeCryptoHostApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Data4LifeCryptoHostApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36FA37D526D6667B00DDCC35 /* Data4LifeCryptoHostAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data4LifeCryptoHostAppApp.swift; sourceTree = "<group>"; };
@@ -233,6 +235,8 @@
 		36FA37D426D6667B00DDCC35 /* Data4LifeCryptoHostApp */ = {
 			isa = PBXGroup;
 			children = (
+				369E89AF270361DA0082309A /* Data4LifeCryptoHostAppDebug.entitlements */,
+				369E89AE270360340082309A /* Data4LifeCryptoHostApp.entitlements */,
 				36FA37D526D6667B00DDCC35 /* Data4LifeCryptoHostAppApp.swift */,
 				36FA37D726D6667B00DDCC35 /* ContentView.swift */,
 				36FA37D926D6667C00DDCC35 /* Assets.xcassets */,
@@ -525,7 +529,6 @@
 				TargetAttributes = {
 					36FA37D226D6667B00DDCC35 = {
 						CreatedOnToolsVersion = 12.5;
-						ProvisioningStyle = Manual;
 					};
 					CD108FF0225B88BE00325389 = {
 						DevelopmentTeam = D2QJWMP9SU;
@@ -683,14 +686,18 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Data4LifeCryptoHostApp/Data4LifeCryptoHostAppDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Data4LifeCryptoHostApp/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = D2QJWMP9SU;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Data4LifeCryptoHostApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -700,6 +707,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.gesundheitscloud.HCSDKIntegration;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -714,6 +723,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Data4LifeCryptoHostApp/Data4LifeCryptoHostApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_ASSET_PATHS = "\"Data4LifeCryptoHostApp/Preview Content\"";
@@ -721,7 +731,8 @@
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Data4LifeCryptoHostApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -730,6 +741,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.gesundheitscloud.HCSDKIntegration;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -865,6 +877,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = D2QJWMP9SU;
@@ -938,7 +951,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = D2QJWMP9SU;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Crypto/Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
